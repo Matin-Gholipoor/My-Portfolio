@@ -1,0 +1,82 @@
+:root {
+  --neon-color: rgb(92, 143, 252);
+  --background-color: rgb(24, 24, 45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 5px;
+  height: 100%;
+  background-color: var(--background-color);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+p {
+  margin: 0;
+}
+
+.neon-border {
+  border: 2px solid var(--neon-color);
+  border-radius: 10px;
+  box-shadow: 0 0 10px var(--neon-color),
+    inset 0 0 10px var(--neon-color);
+  font-family: "Pixelify Sans", sans-serif;
+  color: var(--neon-color);
+  text-shadow: 0 0 7px var(--neon-color);
+  text-align: center;
+}
+
+header {
+  margin: 0 0 20px 0;
+  padding: 15px;
+  font-size: 18px;
+  flex: 0 0 auto;
+}
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  column-gap: 20px;
+  min-height: 0;
+  max-height: 100%;
+}
+
+section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  position: relative;
+}
+
+aside {
+  flex: 1;
+  overflow: hidden;
+}
+
+.crt-monitor {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: relative;
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+}
