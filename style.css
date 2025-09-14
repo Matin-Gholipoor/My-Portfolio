@@ -1,6 +1,7 @@
 :root {
   --blue-neon: rgb(92, 143, 252);
   --pink-neon: rgb(253, 123, 255);
+  --yellow-title: rgb(255, 225, 0);
   --background-color: rgb(24, 24, 45);
 }
 
@@ -17,6 +18,8 @@ body {
 
   display: flex;
   flex-direction: column;
+
+  font-family: "Pixelify Sans", sans-serif;
 }
 
 p {
@@ -28,7 +31,6 @@ p {
   border-radius: 10px;
   box-shadow: 0 0 10px var(--blue-neon),
     inset 0 0 10px var(--blue-neon);
-  font-family: "Pixelify Sans", sans-serif;
   color: var(--blue-neon);
   text-shadow: 0 0 7px var(--blue-neon);
   text-align: center;
@@ -39,7 +41,6 @@ p {
   border-radius: 10px;
   box-shadow: 0 0 10px var(--pink-neon),
     inset 0 0 10px var(--pink-neon);
-  font-family: "Pixelify Sans", sans-serif;
   color: var(--pink-neon);
   text-shadow: 0 0 7px var(--pink-neon);
   text-align: center;
@@ -55,6 +56,9 @@ header {
 h1 {
   margin-top: 0;
   margin-bottom: 10px;
+
+  color: var(--yellow-title);
+    text-shadow: 0 0 15px var(--yellow-title);
 }
 
 main {
@@ -101,7 +105,7 @@ aside {
   flex: 1;
 }
 
-.guide-list{
+.guide-list {
   text-align: start;
   font-size: 24px;
 
@@ -109,7 +113,7 @@ aside {
   list-style-position: inside
 }
 
-.guide-list li{
+.guide-list li {
   margin-bottom: 20px;
 }
 
@@ -118,16 +122,108 @@ h2 {
   margin: 0 0 20px 0;
 }
 
-.crt-monitor {
+#crt-monitor {
   width: 100%;
   height: 100%;
   object-fit: contain;
   position: relative;
 }
 
-.background {
-  width: 100%;
-  height: 100%;
+#background {
+  width: 94%;
+  height: 94%;
   object-fit: contain;
   position: absolute;
+}
+
+#shopkeeper {
+  height: 180px;
+
+  position: absolute;
+  transform: translate(-100px, -60px);
+}
+
+.shelf {
+  position: absolute;
+}
+
+.shelf img {
+  width: 170px;
+}
+
+#shelf-1 {
+  transform: translate(-180px, 100px);
+}
+
+#shelf-1::after {
+  content: 'About';
+
+  position: absolute;
+  transform: translate(-107px, 4px);
+}
+
+#shelf-2 {
+  transform: translate(20px, 100px);
+}
+
+#shelf-2::after {
+  content: 'Skills';
+
+  position: absolute;
+  transform: translate(-105px, 4px);
+}
+
+#shelf-3 {
+  transform: translate(220px, 100px);
+}
+
+#shelf-3::after {
+  content: 'Projects';
+
+  position: absolute;
+  transform: translate(-120px, 4px);
+}
+
+#main-character {
+  position: absolute;
+  z-index: 100;
+  transform: translate(-240px, 100px);
+}
+
+#main-character-standing {
+  height: 180px;
+  /* display: none; */
+}
+
+#main-character-back {
+  height: 180px;
+  display: none;
+}
+
+#main-character-walking {
+  height: 180px;
+  display: none;
+}
+
+#dialogue-box {
+  position: absolute;
+  transform: translate(120px, -30px);
+}
+
+#dialogue-box img {
+  width: 350px;
+  height: 100px;
+}
+
+.dialogue {
+  width: 335px;
+  color: white;
+  text-shadow: 0 0 7px white;
+
+  transform: translate(25px, -90px);
+}
+
+.shopkeeper-speaker-text {
+  color: yellow;
+  text-shadow: 0 0 7px yellow;
 }
