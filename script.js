@@ -6,6 +6,7 @@ const volumeDispalay = document.getElementById('volume-display');
 const mainCharacter = document.getElementById('main-character');
 const mainCharacter_standing = document.getElementById('main-character-standing');
 const mainCharacter_walking = document.getElementById('main-character-walking');
+const dialogueParagraph = document.getElementById('dialogue');
 
 const state = {
   mainCharacter: {
@@ -15,6 +16,12 @@ const state = {
     isMoving: false
   }
 };
+
+const shopkeeperDialogues = [
+  'First, we will look at this part. It is like the first song on a record. This part has a little bit about me. It also has my information, so you can contact me.',
+  'Next is the second part. It is like the second song on a record. This part shows all my skills. It also shows if my skills are good or very good.',
+  'Last is the final part. This is like the final song on a record. This part has all my projects. Here, you can see how my skills have grown from the first project to the last.'
+];
 
 init();
 
@@ -62,7 +69,9 @@ document.body.addEventListener('keyup', (event) => {
 
 mainCharacter.addEventListener('transitionend', (event) => {
   if (event.propertyName === 'transform') {
-    endMainCharacterMovement();
+    endMainCharacterMovement().then(() => {
+      displayDialogue(Number(state.mainCharacter.position));
+    });
   }
 });
 
@@ -114,9 +123,29 @@ function moveMainCharacter(direction) {
   }
 }
 
-function endMainCharacterMovement() {
+async function endMainCharacterMovement() {
   mainCharacter_standing.style.display = 'inline-block';
   mainCharacter_walking.style.display = 'none';
 
   state.mainCharacter.isMoving = false;
+}
+
+let intervalId;
+function displayDialogue(dialogueNumber) {
+  if (!state.mainCharacter.isMoving) {
+    clearInterval(intervalId);
+
+    let index = 0;
+    dialogueParagraph.innerHTML = '<span class="shopkeeper-speaker-text">Shopkeeper: </span>';
+
+    intervalId = setInterval(() => {
+      if (index === shopkeeperDialogues[dialogueNumber].length) {
+        clearInterval(intervalId);
+        return;
+      }
+
+      dialogueParagraph.innerHTML += shopkeeperDialogues[dialogueNumber][index];
+      index++;
+    }, 15);
+  }
 }

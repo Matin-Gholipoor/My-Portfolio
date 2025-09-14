@@ -241,19 +241,21 @@ h2 {
 #dialogue-box {
   position: absolute;
   transform: translate(120px, -30px);
+  height: 100px;
 }
 
 #dialogue-box img {
   width: 350px;
-  height: 100px;
+  height: 100%;
 }
 
-.dialogue {
-  width: 335px;
+#dialogue {
+  width: 315px;
   color: white;
   text-shadow: 0 0 7px white;
+  font-size: 14px;
 
-  transform: translate(25px, -90px);
+  transform: translate(23px, -90px);
 }
 
 .shopkeeper-speaker-text {
