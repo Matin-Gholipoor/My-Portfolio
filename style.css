@@ -22,7 +22,7 @@ body {
   display: flex;
   flex-direction: column;
 
-  font-family: "Pixelify Sans", sans-serif;
+  font-family: "VT323", monospace;
 }
 
 p {
@@ -253,7 +253,7 @@ h2 {
   width: 315px;
   color: white;
   text-shadow: 0 0 7px white;
-  font-size: 14px;
+  font-size: 16px;
 
   transform: translate(23px, -90px);
 }
