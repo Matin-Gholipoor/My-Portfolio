@@ -1,5 +1,6 @@
 :root {
-  --neon-color: rgb(92, 143, 252);
+  --blue-neon: rgb(92, 143, 252);
+  --pink-neon: rgb(253, 123, 255);
   --background-color: rgb(24, 24, 45);
 }
 
@@ -13,7 +14,7 @@ body {
   padding: 5px;
   height: 100%;
   background-color: var(--background-color);
-  overflow: hidden;
+
   display: flex;
   flex-direction: column;
 }
@@ -22,14 +23,25 @@ p {
   margin: 0;
 }
 
-.neon-border {
-  border: 2px solid var(--neon-color);
+.blue-neon-border {
+  border: 2px solid var(--blue-neon);
   border-radius: 10px;
-  box-shadow: 0 0 10px var(--neon-color),
-    inset 0 0 10px var(--neon-color);
+  box-shadow: 0 0 10px var(--blue-neon),
+    inset 0 0 10px var(--blue-neon);
   font-family: "Pixelify Sans", sans-serif;
-  color: var(--neon-color);
-  text-shadow: 0 0 7px var(--neon-color);
+  color: var(--blue-neon);
+  text-shadow: 0 0 7px var(--blue-neon);
+  text-align: center;
+}
+
+.pink-neon-border {
+  border: 2px solid var(--pink-neon);
+  border-radius: 10px;
+  box-shadow: 0 0 10px var(--pink-neon),
+    inset 0 0 10px var(--pink-neon);
+  font-family: "Pixelify Sans", sans-serif;
+  color: var(--pink-neon);
+  text-shadow: 0 0 7px var(--pink-neon);
   text-align: center;
 }
 
@@ -53,18 +65,57 @@ main {
   max-height: 100%;
 }
 
-section {
+main>section {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+
 
   position: relative;
 }
 
 aside {
   flex: 1;
-  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+
+  justify-content: start;
+
+  padding: 20px;
+}
+
+.settings-section {
+  margin-bottom: 10px;
+}
+
+.volume-row {
+  display: flex;
+  align-items: centers;
+
+  column-gap: 10px;
+}
+
+.volume-row input {
+  flex: 1;
+}
+
+.guide-list{
+  text-align: start;
+  font-size: 24px;
+
+  padding-inline-start: 5px;
+  list-style-position: inside
+}
+
+.guide-list li{
+  margin-bottom: 20px;
+}
+
+h2 {
+  padding: 5px;
+  margin: 0 0 20px 0;
 }
 
 .crt-monitor {
