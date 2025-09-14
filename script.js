@@ -7,6 +7,8 @@ const mainCharacter = document.getElementById('main-character');
 const mainCharacter_standing = document.getElementById('main-character-standing');
 const mainCharacter_walking = document.getElementById('main-character-walking');
 const dialogueParagraph = document.getElementById('dialogue');
+const startMessage = document.getElementById('start-message');
+const guideList = document.getElementById('guide-list');
 
 const state = {
   mainCharacter: {
@@ -14,13 +16,16 @@ const state = {
     // it means in front of which shelf the character stands
     position: 0,
     isMoving: false
+  },
+  game: {
+    isStarted: false
   }
 };
 
 const shopkeeperDialogues = [
-  'First, we will look at this part. It is like the first song on a record. This part has a little bit about me. It also has my information, so you can contact me.',
-  'Next is the second part. It is like the second song on a record. This part shows all my skills. It also shows if my skills are good or very good.',
-  'Last is the final part. This is like the final song on a record. This part has all my projects. Here, you can see how my skills have grown from the first project to the last.',
+  "First, we will look at this part. It is like the first song on a record. This part has a little bit about Matin. It also has Matin's information, so you can contact him.",
+  "Next is the second part. It is like the second song on a record. This part shows all Matin's skills. It also shows if his skills are good or very good.",
+  "Last is the final part. This is like the final song on a record. This part has all Matin's projects. Here, you can see how his skills have grown from the first project to the last.",
   "You got the right sound there, kid. This is my collection, my whole life's work. Take a look around. You'll find what you're lookin' for."
 ];
 
@@ -60,13 +65,24 @@ volumeSlider.addEventListener('input', (event) => {
 });
 
 document.body.addEventListener('keyup', (event) => {
-  switch (event.key) {
-    case 'ArrowRight':
-      moveMainCharacter('right');
-      break;
-    case 'ArrowLeft':
-      moveMainCharacter('left');
-      break;
+  if (!state.game.isStarted) {
+    if (event.key === ' ') {
+      displayDialogue(0);
+
+      startMessage.style.display = 'none';
+      guideList.style.display = 'block';
+
+      state.game.isStarted = true;
+    }
+  }
+  else {
+    switch (event.key) {
+      case 'ArrowRight':
+        moveMainCharacter('right');
+        break;
+      case 'ArrowLeft':
+        moveMainCharacter('left');
+    }
   }
 });
 

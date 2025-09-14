@@ -6,6 +6,7 @@
   --background-color: rgb(24, 24, 45);
   --neon-green: rgb(90, 176, 0);
   --neon-saturated-pink: rgb(231, 19, 248);
+  --neon-orange: rgb(255, 128, 0);
 }
 
 * {
@@ -135,15 +136,17 @@ aside {
   text-align: left;
 }
 
-.guide-list {
+#guide-list {
   text-align: start;
   font-size: 24px;
 
   padding-inline-start: 5px;
-  list-style-position: inside
+  list-style-position: inside;
+
+  display: none;
 }
 
-.guide-list li {
+#guide-list li {
   margin-bottom: 20px;
 }
 
@@ -191,7 +194,7 @@ h2 {
   content: 'About';
 
   position: absolute;
-  transform: translate(-107px, 4px);
+  transform: translate(-102px, 4px);
 }
 
 #shelf-2 {
@@ -213,7 +216,7 @@ h2 {
   content: 'Projects';
 
   position: absolute;
-  transform: translate(-120px, 4px);
+  transform: translate(-110px, 4px);
 }
 
 #main-character {
@@ -306,4 +309,26 @@ h2 {
 #volume-up-icon:hover,
 #volume-off-icon:hover {
   color: var(--neon-blue-hover);
+}
+
+#start-message {
+  color: var(--neon-orange);
+  text-shadow: 0 0 7px var(--neon-orange);
+  font-size: 28px;
+
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 100%;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
