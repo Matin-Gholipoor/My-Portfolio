@@ -271,6 +271,18 @@ h2 {
   z-index: 99;
 
   opacity: 10%;
+
+  animation: crt-monitor-effect-animation 500ms linear infinite;
+}
+
+@keyframes crt-monitor-effect-animation {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateY(7px);
+  }
 }
 
 #music {
