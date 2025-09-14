@@ -17,9 +17,10 @@
 </head>
 
 <body>
-  <!-- <audio controls>
+
+  <audio controls loop id="music">
     <source src="assets/Stayin Alive - 8 bit.mp3" type="audio/mpeg">
-  </audio> -->
+  </audio>
 
   <header class="blue-neon-border">
     <h1>Record Store Boy</h1>
@@ -30,11 +31,19 @@
     <aside class="blue-neon-border">
       <section class="settings-section">
         <h2 class="pink-neon-border">Settings</h2>
-        <div class="volume-row">
-          <input type="range" min="0" max="100">
-          <span class="material-symbols-rounded">
-            volume_up
-          </span>
+        <div>
+
+          <div class="volume-row">
+            <input type="range" min="0" max="100" value="70" id="volume-slider">
+            <span class="material-symbols-rounded" id="volume-up-icon">
+              volume_up
+            </span>
+            <span class="material-symbols-rounded" id="volume-off-icon">
+              volume_off
+            </span>
+          </div>
+
+          <p id="volume-display">Volume: 70%</p>
         </div>
       </section>
 
@@ -74,11 +83,11 @@
       </div>
 
       <div id="dialogue-box">
-        <img src="assets/images/dialogue box.png" alt="dialogue box" >
+        <img src="assets/images/dialogue box.png" alt="dialogue box">
 
         <p class="dialogue">
           <span class="shopkeeper-speaker-text">Shopkeeper: </span>
-          The collection "About" explains about Matin. 
+          The collection "About" explains about Matin.
         </p>
       </div>
     </section>

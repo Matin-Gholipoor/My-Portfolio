@@ -1,8 +1,11 @@
 :root {
-  --blue-neon: rgb(92, 143, 252);
-  --pink-neon: rgb(253, 123, 255);
+  --neon-blue: rgb(92, 143, 252);
+  --neon-blue-hover: rgb(132, 171, 255);
+  --neon-pink: rgb(253, 123, 255);
   --yellow-title: rgb(255, 225, 0);
   --background-color: rgb(24, 24, 45);
+  --neon-green: rgb(90, 176, 0);
+  --neon-saturated-pink: rgb(231, 19, 248);
 }
 
 * {
@@ -27,22 +30,22 @@ p {
 }
 
 .blue-neon-border {
-  border: 2px solid var(--blue-neon);
+  border: 2px solid var(--neon-blue);
   border-radius: 10px;
-  box-shadow: 0 0 10px var(--blue-neon),
-    inset 0 0 10px var(--blue-neon);
-  color: var(--blue-neon);
-  text-shadow: 0 0 7px var(--blue-neon);
+  box-shadow: 0 0 10px var(--neon-blue),
+    inset 0 0 10px var(--neon-blue);
+  color: var(--neon-blue);
+  text-shadow: 0 0 7px var(--neon-blue);
   text-align: center;
 }
 
 .pink-neon-border {
-  border: 2px solid var(--pink-neon);
+  border: 2px solid var(--neon-pink);
   border-radius: 10px;
-  box-shadow: 0 0 10px var(--pink-neon),
-    inset 0 0 10px var(--pink-neon);
-  color: var(--pink-neon);
-  text-shadow: 0 0 7px var(--pink-neon);
+  box-shadow: 0 0 10px var(--neon-pink),
+    inset 0 0 10px var(--neon-pink);
+  color: var(--neon-pink);
+  text-shadow: 0 0 7px var(--neon-pink);
   text-align: center;
 }
 
@@ -99,10 +102,37 @@ aside {
   align-items: centers;
 
   column-gap: 10px;
+
+  margin-bottom: 10px;
 }
 
 .volume-row input {
   flex: 1;
+
+  -webkit-appearance: none;
+  border: 3px solid var(--neon-blue);
+  border-radius: 2px;
+
+  background-image:
+    linear-gradient(to right, transparent 70%, var(--background-color) 70%),
+    repeating-linear-gradient(90deg,
+      var(--background-color) 0px,
+      var(--background-color) 8px,
+      var(--neon-blue) 8px,
+      var(--neon-blue) 10px);
+
+  box-shadow: 0 0 5px var(--neon-blue),
+    inset 0 0 5px var(--neon-blue);
+
+  cursor: pointer;
+}
+
+.volume-row input::-webkit-slider-thumb {
+  visibility: hidden;
+}
+
+#volume-display {
+  text-align: left;
 }
 
 .guide-list {
@@ -241,4 +271,24 @@ h2 {
   z-index: 99;
 
   opacity: 10%;
+}
+
+#music {
+  display: none;
+}
+
+#volume-up-icon {
+  display: none;
+}
+
+#volume-up-icon,
+#volume-off-icon {
+  cursor: pointer;
+
+  transition: color 100ms;
+}
+
+#volume-up-icon:hover,
+#volume-off-icon:hover {
+  color: var(--neon-blue-hover);
 }
