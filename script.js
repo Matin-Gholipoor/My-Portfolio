@@ -20,8 +20,11 @@ const state = {
 const shopkeeperDialogues = [
   'First, we will look at this part. It is like the first song on a record. This part has a little bit about me. It also has my information, so you can contact me.',
   'Next is the second part. It is like the second song on a record. This part shows all my skills. It also shows if my skills are good or very good.',
-  'Last is the final part. This is like the final song on a record. This part has all my projects. Here, you can see how my skills have grown from the first project to the last.'
+  'Last is the final part. This is like the final song on a record. This part has all my projects. Here, you can see how my skills have grown from the first project to the last.',
+  "You got the right sound there, kid. This is my collection, my whole life's work. Take a look around. You'll find what you're lookin' for."
 ];
+
+let intervalId;
 
 init();
 
@@ -78,6 +81,8 @@ mainCharacter.addEventListener('transitionend', (event) => {
 function init() {
   music.muted = true;
   music.volume = volumeSlider.value / 100;
+
+  displayDialogue(3);
 }
 
 function moveMainCharacter(direction) {
@@ -130,7 +135,6 @@ async function endMainCharacterMovement() {
   state.mainCharacter.isMoving = false;
 }
 
-let intervalId;
 function displayDialogue(dialogueNumber) {
   if (!state.mainCharacter.isMoving) {
     clearInterval(intervalId);
