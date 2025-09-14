@@ -220,6 +220,7 @@ h2 {
   position: absolute;
   z-index: 50;
   transform: translate(-240px, 100px);
+  transition: transform 500ms linear;
 }
 
 #main-character-standing {
