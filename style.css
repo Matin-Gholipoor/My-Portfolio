@@ -58,7 +58,7 @@ h1 {
   margin-bottom: 10px;
 
   color: var(--yellow-title);
-    text-shadow: 0 0 15px var(--yellow-title);
+  text-shadow: 0 0 15px var(--yellow-title);
 }
 
 main {
@@ -127,6 +127,8 @@ h2 {
   height: 100%;
   object-fit: contain;
   position: relative;
+
+  z-index: 100;
 }
 
 #background {
@@ -186,7 +188,7 @@ h2 {
 
 #main-character {
   position: absolute;
-  z-index: 100;
+  z-index: 50;
   transform: translate(-240px, 100px);
 }
 
@@ -226,4 +228,17 @@ h2 {
 .shopkeeper-speaker-text {
   color: yellow;
   text-shadow: 0 0 7px yellow;
+}
+
+#crt-effect {
+  background-image:
+    repeating-linear-gradient(lightgray 0px, lightgray 1px, gray 3px, gray 4px, lightgray 6px, lightgray 7px);
+
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  z-index: 99;
+
+  opacity: 10%;
 }
