@@ -366,6 +366,7 @@ h2 {
 
 #slide-image {
   width: 60%;
+  cursor: pointer;
 }
 
 #modal-buttom-row {

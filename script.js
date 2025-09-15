@@ -28,12 +28,15 @@ const state = {
     onAboutModal: false,
     onProjectsModal: false
   },
+  slides: {
+    isZoomed: false
+  },
   skills: {
     currentSkill: 0
   },
   aboutMe: {
     currectRecord: 0,
-    side: 'front'
+    side: 'front',
   }
 };
 
@@ -236,16 +239,20 @@ document.body.addEventListener('keyup', (event) => {
   else if (state.game.onSkillsModal) {
     switch (event.key) {
       case 'ArrowRight':
-        if (state.skills.currentSkill !== skillsInfo.length - 1) {
-          state.skills.currentSkill++;
+        if (!state.slides.isZoomed) {
+          if (state.skills.currentSkill !== skillsInfo.length - 1) {
+            state.skills.currentSkill++;
+          }
+          displayModal();
         }
-        displayModal();
         break;
       case 'ArrowLeft':
-        if (state.skills.currentSkill !== 0) {
-          state.skills.currentSkill--;
+        if (!state.slides.isZoomed) {
+          if (state.skills.currentSkill !== 0) {
+            state.skills.currentSkill--;
+          }
+          displayModal();
         }
-        displayModal();
         break;
       case 'Escape':
         displayHome();
@@ -254,16 +261,20 @@ document.body.addEventListener('keyup', (event) => {
   else if (state.game.onAboutModal) {
     switch (event.key) {
       case 'ArrowRight':
-        if (state.aboutMe.currectRecord !== aboutMeInfo.length - 1) {
-          state.aboutMe.currectRecord++;
+        if (!state.slides.isZoomed) {
+          if (state.aboutMe.currectRecord !== aboutMeInfo.length - 1) {
+            state.aboutMe.currectRecord++;
+          }
+          displayModal();
         }
-        displayModal();
         break;
       case 'ArrowLeft':
-        if (state.aboutMe.currectRecord !== 0) {
-          state.aboutMe.currectRecord--;
+        if (!state.slides.isZoomed) {
+          if (state.aboutMe.currectRecord !== 0) {
+            state.aboutMe.currectRecord--;
+          }
+          displayModal();
         }
-        displayModal();
         break;
       case 'Escape':
         displayHome();
@@ -311,6 +322,10 @@ SlideNextButton.addEventListener('click', () => {
 
 toggleSideButton.addEventListener('click', () => {
   toggleSide();
+});
+
+slideImage.addEventListener('click', () => {
+  toggleZoom();
 });
 
 function init() {
@@ -454,6 +469,9 @@ function displayHome() {
 
   toggleSideButton.style.display = 'none';
 
+  slideImage.style.width = '60%';
+  state.slides.isZoomed = false;
+
   guideList.innerHTML = `
     <li>Use left and right arrow keys to move.</li>
     <li>Use space to explore a collection.</li>
@@ -477,5 +495,20 @@ function toggleSide() {
     toggleSideButton.textContent = 'Back side';
 
     state.aboutMe.side = 'front';
+  }
+}
+
+function toggleZoom() {
+  if (state.slides.isZoomed) {
+    slideImage.style.width = '60%';
+    toggleSideButton.style.display = 'inline-block';
+
+    state.slides.isZoomed = false;
+  }
+  else {
+    slideImage.style.width = '100%';
+    toggleSideButton.style.display = 'none';
+
+    state.slides.isZoomed = true;
   }
 }
