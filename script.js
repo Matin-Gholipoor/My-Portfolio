@@ -4,8 +4,6 @@ const music = document.getElementById('music');
 const volumeSlider = document.getElementById('volume-slider');
 const volumeDispalay = document.getElementById('volume-display');
 const mainCharacter = document.getElementById('main-character');
-const mainCharacter_standing = document.getElementById('main-character-standing');
-const mainCharacter_walking = document.getElementById('main-character-walking');
 const dialogueParagraph = document.getElementById('dialogue');
 const startMessage = document.getElementById('start-message');
 const guideList = document.getElementById('guide-list');
@@ -107,6 +105,29 @@ const skills = [
   }
 ];
 
+const mainCharacterFigures = [
+  {
+    name: 'standing',
+    src: 'assets/images/characters/main character/standing.png',
+    alt: 'main charater - standing',
+  },
+  {
+    name: 'back view',
+    src: 'assets/images/characters/main character/standing - back.png',
+    alt: 'main charater - back view',
+  },
+  {
+    name: 'walking',
+    src: 'assets/images/characters/main character/walking.gif',
+    alt: 'main charater - walking',
+  },
+  {
+    name: 'walking reversed',
+    src: 'assets/images/characters/main character/walking - reversed.gif',
+    alt: 'main charater - walking reversed',
+  }
+];
+
 let intervalId;
 
 init();
@@ -205,6 +226,9 @@ function init() {
   music.volume = volumeSlider.value / 100;
 
   displayDialogue(3);
+
+  mainCharacter.src = mainCharacterFigures[0].src;
+  mainCharacter.alt = mainCharacterFigures[0].alt;
 }
 
 function moveMainCharacter(direction) {
@@ -223,8 +247,6 @@ function moveMainCharacter(direction) {
           state.mainCharacter.isMoving = true;
           break;
       }
-
-      mainCharacter_walking.style.transform = 'scaleX(1)';
     }
     else if (direction === 'left') {
       switch (state.mainCharacter.position) {
@@ -239,20 +261,30 @@ function moveMainCharacter(direction) {
           state.mainCharacter.isMoving = true;
           break;
       }
-
-      mainCharacter_walking.style.transform = 'scaleX(-1)';
     }
 
     if (state.mainCharacter.isMoving) {
-      mainCharacter_standing.style.display = 'none';
-      mainCharacter_walking.style.display = 'inline-block';
+      if (direction === "right") {
+        mainCharacter.src = mainCharacterFigures[2].src;
+        mainCharacter.alt = mainCharacterFigures[2].alt;
+        mainCharacter.loop = true;
+        mainCharacter.autoplay = true;
+      }
+      else {
+        mainCharacter.src = mainCharacterFigures[3].src;
+        mainCharacter.alt = mainCharacterFigures[3].alt;
+        mainCharacter.loop = true;
+        mainCharacter.autoplay = true;
+      }
     }
   }
 }
 
 async function endMainCharacterMovement() {
-  mainCharacter_standing.style.display = 'inline-block';
-  mainCharacter_walking.style.display = 'none';
+  mainCharacter.src = mainCharacterFigures[0].src;
+  mainCharacter.alt = mainCharacterFigures[0].alt;
+  mainCharacter.loop = false;
+  mainCharacter.autoplay = false;
 
   state.mainCharacter.isMoving = false;
 }
@@ -281,6 +313,9 @@ function displaySkillsModal() {
   state.game.onSkillsModal = true;
   skillsModal.style.display = 'flex';
 
+  mainCharacter.src = mainCharacterFigures[1].src;
+  mainCharacter.alt = mainCharacterFigures[1].alt;
+
   guideList.innerHTML = `
     <li>Use left and right arrow keys explore skills.</li>
     <li>Use backspace key to get back to home.</li>
@@ -297,6 +332,9 @@ function displayHome() {
   state.game.onProjectsModal = false;
 
   skillsModal.style.display = 'none';
+
+  mainCharacter.src = mainCharacterFigures[0].src;
+  mainCharacter.alt = mainCharacterFigures[0].alt;
 
   guideList.innerHTML = `
     <li>Use left and right arrow keys to move.</li>

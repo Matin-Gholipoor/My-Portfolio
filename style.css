@@ -222,23 +222,9 @@ h2 {
 #main-character {
   position: absolute;
   z-index: 50;
+  height: 180px;
   transform: translate(-240px, 100px);
   transition: transform 500ms linear;
-}
-
-#main-character-standing {
-  height: 180px;
-  /* display: none; */
-}
-
-#main-character-back {
-  height: 180px;
-  display: none;
-}
-
-#main-character-walking {
-  height: 180px;
-  display: none;
 }
 
 #dialogue-box {
