@@ -149,6 +149,22 @@ const aboutMeInfo = [
     'front-alt': 'about me - front',
     'back-image': 'assets/images/about me/about me - back.png',
     'back-alt': 'about me - back',
+    'back-side-html': `
+        <p>
+          I'm a front-end developer, I design with care,
+          Mixing art and code to make ideas share.
+          I build websites that are easy and bright,
+          Simple to use and a joy at first sight.
+
+          I studied computer engineering for my degree,
+          Now learning software, to grow and to be.
+          People say I'm careful, curious, and neat,
+          Organized, focused, and my work is complete.
+
+          If you want designs that are clear and true,
+          Let’s work together — I'd be glad to help you.
+        </p>
+      `
   },
   {
     name: 'contact me',
@@ -156,25 +172,9 @@ const aboutMeInfo = [
     'front-alt': 'contact me - front',
     'back-image': 'assets/images/about me/contact me - back.png',
     'back-alt': 'contact me - back',
+    'back-side-html': 'contact me'
   }
 ];
-
-const aboutMeText = {
-  text: `
-    I'm a front-end developer, I design with care,
-    Mixing art and code to make ideas share.
-    I build websites that are easy and bright,
-    Simple to use and a joy at first sight.
-
-    I studied computer engineering for my degree,
-    Now learning software, to grow and to be.
-    People say I'm careful, curious, and neat,
-    Organized, focused, and my work is complete.
-
-    If you want designs that are clear and true,
-    Let’s work together — I'd be glad to help you.
-  `
-}
 
 let intervalId;
 
@@ -463,6 +463,8 @@ function displayModal() {
 
   SlideNextButton.style.visibility = 'visible';
   SlidePreviousButton.style.visibility = 'visible';
+
+  slideImageContent.innerHTML = '';
 }
 
 function displayHome() {
@@ -484,9 +486,8 @@ function displayHome() {
   SlideNextButton.style.visibility = 'hidden';
   SlidePreviousButton.style.visibility = 'hidden';
 
-  modalSlideContainer.style.width = '400px';
+  modalSlideContainer.style.width = '50%';
 
-  slideImageContainer.style.width = '60%';
   state.slides.isZoomed = false;
 
   guideList.innerHTML = `
@@ -505,7 +506,7 @@ function toggleSide() {
 
     state.aboutMe.side = 'back';
 
-    slideImageContent.textContent = 'sometext';
+    slideImageContent.innerHTML = aboutMeInfo[state.aboutMe.currectRecord]['back-side-html'];
   }
   else {
     slideImage.src = aboutMeInfo[state.aboutMe.currectRecord]['front-image'];
@@ -521,24 +522,26 @@ function toggleSide() {
 
 function toggleZoom() {
   if (state.slides.isZoomed) {
-    modalSlideContainer.style.width = '400px';
+    modalSlideContainer.style.width = '50%';
 
-    slideImageContainer.style.width = '60%';
     modalBottomRow.style.visibility = 'visible';
 
     SlideNextButton.style.visibility = 'visible';
     SlidePreviousButton.style.visibility = 'visible';
+
+    slideImageContent.style.fontSize = '14px';
 
     state.slides.isZoomed = false;
   }
   else {
     modalSlideContainer.style.width = '75%';
 
-    slideImageContainer.style.width = '100%';
     modalBottomRow.style.visibility = 'hidden';
 
     SlideNextButton.style.visibility = 'hidden';
     SlidePreviousButton.style.visibility = 'hidden';
+
+    slideImageContent.style.fontSize = '21.5px';
 
     state.slides.isZoomed = true;
   }
