@@ -365,7 +365,7 @@ h2 {
   width: 100%;
 }
 
-#slide-image-container{
+#slide-image-container {
   flex: 1;
 
   display: flex;
@@ -398,7 +398,7 @@ h2 {
   cursor: pointer;
 }
 
-#slide-image-content{
+#slide-image-content {
   color: white;
   font-size: 14px;
 
@@ -408,4 +408,8 @@ h2 {
   padding: 10%;
 
   pointer-events: none;
+}
+
+#slide-image-content a {
+  pointer-events: auto;
 }

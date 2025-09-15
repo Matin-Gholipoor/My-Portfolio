@@ -162,7 +162,7 @@ const aboutMeInfo = [
           Organized, focused, and my work is complete.
 
           If you want designs that are clear and true,
-          Let’s work together — I'd be glad to help you.
+          Let's work together — I'd be glad to help you.
         </p>
       `
   },
@@ -172,7 +172,23 @@ const aboutMeInfo = [
     'front-alt': 'contact me - front',
     'back-image': 'assets/images/about me/contact me - back.png',
     'back-alt': 'contact me - back',
-    'back-side-html': 'contact me'
+    'back-side-html': `
+        <p>
+          Github:
+          <a href="https://github.com/Matin-Gholipoor" target="_blank">github.com/Matin-Gholipoor</a>
+        </p>
+        <p>
+          Gmail:
+          <a href="mailto:matin.3108@gmail.com">matin.3108@gmail.com</a>
+        </p>
+        <p>
+          Phone: 0915 772 2400
+        </p>
+        <p>
+          Telegram:
+          <a href="https://t.me/Matin_Gholipour" target="_blank">t.me/Matin_Gholipour</a>
+        </p>
+      `
   }
 ];
 
