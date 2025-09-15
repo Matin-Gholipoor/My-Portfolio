@@ -13,6 +13,9 @@ const SlidePreviousButton = document.getElementById('previous-button');
 const SlideNextButton = document.getElementById('next-button');
 const modalBottomRow = document.getElementById('modal-buttom-row');
 const toggleSideButton = document.getElementById('toggle-side-button');
+const slideImageContainer = document.getElementById('slide-image-container');
+const slideImageContent = document.getElementById('slide-image-content');
+const modalSlideContainer = document.getElementById('modal-silde-container');
 
 const state = {
   mainCharacter: {
@@ -431,6 +434,7 @@ function displayModal() {
 
       toggleSideButton.style.display = 'inline-block';
       toggleSideButton.textContent = 'Back side';
+
       break;
 
     case 1:
@@ -443,7 +447,10 @@ function displayModal() {
 
       slideImage.src = skillsInfo[state.skills.currentSkill].image;
       slideImage.alt = skillsInfo[state.skills.currentSkill].alt;
+
+      toggleSideButton.style.display = 'none';
       break;
+
   }
 
   state.game.onHome = false;
@@ -451,6 +458,11 @@ function displayModal() {
 
   mainCharacter.src = mainCharacterFigures[1].src;
   mainCharacter.alt = mainCharacterFigures[1].alt;
+
+  modalBottomRow.style.visibility = 'visible';
+
+  SlideNextButton.style.visibility = 'visible';
+  SlidePreviousButton.style.visibility = 'visible';
 }
 
 function displayHome() {
@@ -467,9 +479,14 @@ function displayHome() {
   state.skills.currentSkill = 0;
   state.aboutMe.currectRecord = 0;
 
-  toggleSideButton.style.display = 'none';
+  modalBottomRow.style.visibility = 'hidden';
 
-  slideImage.style.width = '60%';
+  SlideNextButton.style.visibility = 'hidden';
+  SlidePreviousButton.style.visibility = 'hidden';
+
+  modalSlideContainer.style.width = '400px';
+
+  slideImageContainer.style.width = '60%';
   state.slides.isZoomed = false;
 
   guideList.innerHTML = `
@@ -487,6 +504,8 @@ function toggleSide() {
     toggleSideButton.textContent = 'Front side';
 
     state.aboutMe.side = 'back';
+
+    slideImageContent.textContent = 'sometext';
   }
   else {
     slideImage.src = aboutMeInfo[state.aboutMe.currectRecord]['front-image'];
@@ -495,19 +514,31 @@ function toggleSide() {
     toggleSideButton.textContent = 'Back side';
 
     state.aboutMe.side = 'front';
+
+    slideImageContent.textContent = '';
   }
 }
 
 function toggleZoom() {
   if (state.slides.isZoomed) {
-    slideImage.style.width = '60%';
-    toggleSideButton.style.display = 'inline-block';
+    modalSlideContainer.style.width = '400px';
+
+    slideImageContainer.style.width = '60%';
+    modalBottomRow.style.visibility = 'visible';
+
+    SlideNextButton.style.visibility = 'visible';
+    SlidePreviousButton.style.visibility = 'visible';
 
     state.slides.isZoomed = false;
   }
   else {
-    slideImage.style.width = '100%';
-    toggleSideButton.style.display = 'none';
+    modalSlideContainer.style.width = '75%';
+
+    slideImageContainer.style.width = '100%';
+    modalBottomRow.style.visibility = 'hidden';
+
+    SlideNextButton.style.visibility = 'hidden';
+    SlidePreviousButton.style.visibility = 'hidden';
 
     state.slides.isZoomed = true;
   }
