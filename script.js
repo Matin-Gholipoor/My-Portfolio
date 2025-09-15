@@ -9,6 +9,8 @@ const startMessage = document.getElementById('start-message');
 const guideList = document.getElementById('guide-list');
 const skillImage = document.getElementById('skill-image');
 const skillsModal = document.getElementById('skills-modal');
+const skillsSlidePreviousButton = document.getElementById('previous-button');
+const skillsSlideNextButton = document.getElementById('next-button');
 
 const state = {
   mainCharacter: {
@@ -206,7 +208,7 @@ document.body.addEventListener('keyup', (event) => {
         }
         displaySkillsModal();
         break;
-      case 'Backspace':
+      case 'Escape':
         displayHome();
     }
 
@@ -219,6 +221,20 @@ mainCharacter.addEventListener('transitionend', (event) => {
       displayDialogue(Number(state.mainCharacter.position));
     });
   }
+});
+
+skillsSlidePreviousButton.addEventListener('click', () => {
+  if (state.skills.currentSkill !== 0) {
+    state.skills.currentSkill--;
+  }
+  displaySkillsModal();
+});
+
+skillsSlideNextButton.addEventListener('click', () => {
+  if (state.skills.currentSkill !== skills.length - 1) {
+    state.skills.currentSkill++;
+  }
+  displaySkillsModal();
 });
 
 function init() {
@@ -317,8 +333,8 @@ function displaySkillsModal() {
   mainCharacter.alt = mainCharacterFigures[1].alt;
 
   guideList.innerHTML = `
-    <li>Use left and right arrow keys explore skills.</li>
-    <li>Use backspace key to get back to home.</li>
+    <li>Use left and right arrow keys, or mouse to explore skills.</li>
+    <li>Use Escape key to get back to home.</li>
   `;
 
   skillImage.src = skills[state.skills.currentSkill].image;

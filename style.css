@@ -356,6 +356,8 @@ h2 {
   border: none;
 
   width: 40px;
+
+  cursor: pointer;
 }
 
 .skills-silde-button img {
