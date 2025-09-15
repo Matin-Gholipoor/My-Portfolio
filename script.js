@@ -38,7 +38,7 @@ const shopkeeperDialogues = [
   "You got the right sound there, kid. This is my collection, my whole life's work. Take a look around. You'll find what you're lookin' for."
 ];
 
-const skills = [
+const skillsInfo = [
   {
     name: 'JavaScript',
     image: 'assets/images/skills/JavaScript.png',
@@ -214,7 +214,7 @@ document.body.addEventListener('keyup', (event) => {
   else if (state.game.onSkillsModal) {
     switch (event.key) {
       case 'ArrowRight':
-        if (state.skills.currentSkill !== skills.length - 1) {
+        if (state.skills.currentSkill !== skillsInfo.length - 1) {
           state.skills.currentSkill++;
         }
         displayModal();
@@ -251,7 +251,7 @@ SlidePreviousButton.addEventListener('click', () => {
 
 SlideNextButton.addEventListener('click', () => {
   if (state.game.onSkillsModal) {
-    if (state.skills.currentSkill !== skills.length - 1) {
+    if (state.skills.currentSkill !== skillsInfo.length - 1) {
       state.skills.currentSkill++;
     }
     displayModal();
@@ -361,8 +361,8 @@ function displayModal() {
         <li>Use Escape key to get back to home.</li>
       `;
     
-      slideImage.src = skills[state.skills.currentSkill].image;
-      slideImage.alt = skills[state.skills.currentSkill].alt;
+      slideImage.src = skillsInfo[state.skills.currentSkill].image;
+      slideImage.alt = skillsInfo[state.skills.currentSkill].alt;
       break;
   }
 }
