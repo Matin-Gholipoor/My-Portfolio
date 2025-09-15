@@ -149,7 +149,7 @@ volumeOffIcon.addEventListener('click', () => {
 });
 
 volumeSlider.addEventListener('input', (event) => {
-  volumeDispalay.textContent = `Volume = ${volumeSlider.value}%`;
+  volumeDispalay.textContent = `Volume: ${volumeSlider.value}%`;
 
   volumeSlider.style.backgroundImage = `
     linear-gradient(to right, transparent ${volumeSlider.value}%, var(--background-color) ${volumeSlider.value}%),

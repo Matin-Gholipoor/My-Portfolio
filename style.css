@@ -162,6 +162,8 @@ h2 {
   position: relative;
 
   z-index: 100;
+
+  pointer-events: none;
 }
 
 #background {
@@ -265,6 +267,8 @@ h2 {
   opacity: 10%;
 
   animation: crt-monitor-effect-animation 500ms linear infinite;
+
+  pointer-events: none;
 }
 
 @keyframes crt-monitor-effect-animation {
