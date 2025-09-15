@@ -269,6 +269,8 @@ h2 {
   animation: crt-monitor-effect-animation 500ms linear infinite;
 
   pointer-events: none;
+
+  border-radius: 30px;
 }
 
 @keyframes crt-monitor-effect-animation {
