@@ -9,6 +9,8 @@ const mainCharacter_walking = document.getElementById('main-character-walking');
 const dialogueParagraph = document.getElementById('dialogue');
 const startMessage = document.getElementById('start-message');
 const guideList = document.getElementById('guide-list');
+const skillImage = document.getElementById('skill-image');
+const skillsModal = document.getElementById('skills-modal');
 
 const state = {
   mainCharacter: {
@@ -18,7 +20,14 @@ const state = {
     isMoving: false
   },
   game: {
-    isStarted: false
+    isStarted: false,
+    onHome: false,
+    onSkillsModal: false,
+    onAboutModal: false,
+    onProjectsModal: false
+  },
+  skills: {
+    currentSkill: 0
   }
 };
 
@@ -27,6 +36,75 @@ const shopkeeperDialogues = [
   "Next is the second part. It is like the second song on a record. This part shows all Matin's skills. It also shows if his skills are good or very good.",
   "Last is the final part. This is like the final song on a record. This part has all Matin's projects. Here, you can see how his skills have grown from the first project to the last.",
   "You got the right sound there, kid. This is my collection, my whole life's work. Take a look around. You'll find what you're lookin' for."
+];
+
+const skills = [
+  {
+    name: 'JavaScript',
+    image: 'assets/images/skills/JavaScript.png',
+    alt: 'JavaScript',
+    level: 100
+  },
+  {
+    name: 'HTML-CSS',
+    image: 'assets/images/skills/HTML-CSS.png',
+    alt: 'HTML-CSS',
+    level: 100
+  },
+  {
+    name: 'React',
+    image: 'assets/images/skills/react.png',
+    alt: 'React',
+    level: 100
+  },
+  {
+    name: 'C/C++',
+    image: 'assets/images/skills/C-C++.png',
+    alt: 'C/C++',
+    level: 100
+  },
+  {
+    name: 'Python',
+    image: 'assets/images/skills/python.png',
+    alt: 'Python',
+    level: 40
+  },
+  {
+    name: 'Git',
+    image: 'assets/images/skills/git.png',
+    alt: 'Git',
+    level: 80
+  },
+  {
+    name: 'Linux',
+    image: 'assets/images/skills/linux.png',
+    alt: 'Linux',
+    level: 70
+  },
+  {
+    name: 'Qt',
+    image: 'assets/images/skills/qt.png',
+    alt: 'Qt',
+    level: 40
+  },
+  {
+    name: 'English',
+    image: 'assets/images/skills/english.png',
+    alt: 'English',
+    level: 100
+  },
+  {
+    name: 'Photoshop',
+    image: 'assets/images/skills/photoshop.png',
+    alt: 'Photoshop',
+    level: 80
+  },
+  {
+    name: 'Autocad',
+    image: 'assets/images/skills/autocad.png',
+    alt: 'Autocad',
+    level: 50
+  }
 ];
 
 let intervalId;
@@ -67,22 +145,50 @@ volumeSlider.addEventListener('input', (event) => {
 document.body.addEventListener('keyup', (event) => {
   if (!state.game.isStarted) {
     if (event.key === ' ') {
-      displayDialogue(0);
-
       startMessage.style.display = 'none';
       guideList.style.display = 'block';
 
       state.game.isStarted = true;
+      state.game.onHome = true;
+
+      displayDialogue(0);
+      displayHome();
     }
   }
-  else {
+  else if (state.game.onHome) {
     switch (event.key) {
       case 'ArrowRight':
         moveMainCharacter('right');
         break;
       case 'ArrowLeft':
         moveMainCharacter('left');
+        break;
+      case ' ':
+        switch (state.mainCharacter.position) {
+          case 1:
+            displaySkillsModal();
+            break;
+        }
     }
+  }
+  else if (state.game.onSkillsModal) {
+    switch (event.key) {
+      case 'ArrowRight':
+        if (state.skills.currentSkill !== skills.length - 1) {
+          state.skills.currentSkill++;
+        }
+        displaySkillsModal();
+        break;
+      case 'ArrowLeft':
+        if (state.skills.currentSkill !== 0) {
+          state.skills.currentSkill--;
+        }
+        displaySkillsModal();
+        break;
+      case 'Backspace':
+        displayHome();
+    }
+
   }
 });
 
@@ -168,4 +274,33 @@ function displayDialogue(dialogueNumber) {
       index++;
     }, 15);
   }
+}
+
+function displaySkillsModal() {
+  state.game.onHome = false;
+  state.game.onSkillsModal = true;
+  skillsModal.style.display = 'flex';
+
+  guideList.innerHTML = `
+    <li>Use left and right arrow keys explore skills.</li>
+    <li>Use backspace key to get back to home.</li>
+  `;
+
+  skillImage.src = skills[state.skills.currentSkill].image;
+  skillImage.alt = skills[state.skills.currentSkill].alt;
+}
+
+function displayHome() {
+  state.game.onHome = true;
+  state.game.onSkillsModal = false;
+  state.game.onAboutModal = false;
+  state.game.onProjectsModal = false;
+
+  skillsModal.style.display = 'none';
+
+  guideList.innerHTML = `
+    <li>Use left and right arrow keys to move.</li>
+    <li>Use space to explore a collection.</li>
+    <li>Shopkeeper explains about each collection.</li>
+  `;
 }

@@ -332,3 +332,46 @@ h2 {
     opacity: 0;
   }
 }
+
+.modal {
+  background-color: rgba(0, 0, 0, 60%);
+
+  position: absolute;
+  width: 95%;
+  height: 95%;
+
+  z-index: 98;
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#skills-silde-container {
+  position: absolute;
+  width: 400px;
+  height: 200px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#previous-button img {
+  transform: scaleX(-1);
+}
+
+.skills-silde-button {
+  background: none;
+  border: none;
+
+  width: 40px;
+}
+
+.skills-silde-button img {
+  width: 100%;
+}
+
+#skill-image {
+  width: 60%;
+}
