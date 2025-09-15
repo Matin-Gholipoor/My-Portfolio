@@ -11,6 +11,8 @@ const slideImage = document.getElementById('slide-image');
 const modal = document.getElementById('modal');
 const SlidePreviousButton = document.getElementById('previous-button');
 const SlideNextButton = document.getElementById('next-button');
+const modalBottomRow = document.getElementById('modal-buttom-row');
+const toggleSideButton = document.getElementById('toggle-side-button');
 
 const state = {
   mainCharacter: {
@@ -28,6 +30,10 @@ const state = {
   },
   skills: {
     currentSkill: 0
+  },
+  aboutMe: {
+    currectRecord: 0,
+    side: 'front'
   }
 };
 
@@ -130,6 +136,23 @@ const mainCharacterFigures = [
   }
 ];
 
+const aboutMeInfo = [
+  {
+    name: 'about me',
+    'front-image': 'assets/images/about me/about me - front.png',
+    'front-alt': 'about me - front',
+    'back-image': 'assets/images/about me/about me - back.png',
+    'back-alt': 'about me - back',
+  },
+  {
+    name: 'contact me',
+    'front-image': 'assets/images/about me/contact me - front.png',
+    'front-alt': 'contact me - front',
+    'back-image': 'assets/images/about me/contact me - back.png',
+    'back-alt': 'contact me - back',
+  }
+];
+
 const aboutMeText = {
   text: `
     I'm a front-end developer, I design with care,
@@ -204,11 +227,10 @@ document.body.addEventListener('keyup', (event) => {
         moveMainCharacter('left');
         break;
       case ' ':
-        switch (state.mainCharacter.position) {
-          case 1:
-            displayModal();
-            break;
+        if (!state.mainCharacter.isMoving) {
+          displayModal();
         }
+        break;
     }
   }
   else if (state.game.onSkillsModal) {
@@ -228,7 +250,24 @@ document.body.addEventListener('keyup', (event) => {
       case 'Escape':
         displayHome();
     }
-
+  }
+  else if (state.game.onAboutModal) {
+    switch (event.key) {
+      case 'ArrowRight':
+        if (state.aboutMe.currectRecord !== aboutMeInfo.length - 1) {
+          state.aboutMe.currectRecord++;
+        }
+        displayModal();
+        break;
+      case 'ArrowLeft':
+        if (state.aboutMe.currectRecord !== 0) {
+          state.aboutMe.currectRecord--;
+        }
+        displayModal();
+        break;
+      case 'Escape':
+        displayHome();
+    }
   }
 });
 
@@ -247,6 +286,12 @@ SlidePreviousButton.addEventListener('click', () => {
     }
     displayModal();
   }
+  else if (state.game.onAboutModal) {
+    if (state.aboutMe.currectRecord !== 0) {
+      state.aboutMe.currectRecord--;
+    }
+    displayModal();
+  }
 });
 
 SlideNextButton.addEventListener('click', () => {
@@ -256,6 +301,16 @@ SlideNextButton.addEventListener('click', () => {
     }
     displayModal();
   }
+  else if (state.game.onAboutModal) {
+    if (state.aboutMe.currectRecord !== aboutMeInfo.length - 1) {
+      state.aboutMe.currectRecord++;
+    }
+    displayModal();
+  }
+});
+
+toggleSideButton.addEventListener('click', () => {
+  toggleSide();
 });
 
 function init() {
@@ -346,25 +401,41 @@ function displayDialogue(dialogueNumber) {
 }
 
 function displayModal() {
-  console.log('here');
-  switch(state.mainCharacter.position){
-    case 1:
-      state.game.onHome = false;
-      state.game.onSkillsModal = true;
-      modal.style.display = 'flex';
-    
-      mainCharacter.src = mainCharacterFigures[1].src;
-      mainCharacter.alt = mainCharacterFigures[1].alt;
-    
+  switch (state.mainCharacter.position) {
+    case 0:
+      state.game.onAboutModal = true;
+
       guideList.innerHTML = `
-        <li>Use left and right arrow keys, or mouse to explore skills.</li>
+        <li>Use left and right arrow keys, or click arrows to explore collection.</li>
+        <li>Use Escape key to get back to home.</li>
+        <li>Click on the record to zoom in and zoom out.</li>
+      `;
+
+      slideImage.src = aboutMeInfo[state.aboutMe.currectRecord]['front-image'];
+      slideImage.alt = aboutMeInfo[state.aboutMe.currectRecord]['front-alt'];
+
+      toggleSideButton.style.display = 'inline-block';
+      toggleSideButton.textContent = 'Back side';
+      break;
+
+    case 1:
+      state.game.onSkillsModal = true;
+
+      guideList.innerHTML = `
+        <li>Use left and right arrow keys, or click arrows to explore collection.</li>
         <li>Use Escape key to get back to home.</li>
       `;
-    
+
       slideImage.src = skillsInfo[state.skills.currentSkill].image;
       slideImage.alt = skillsInfo[state.skills.currentSkill].alt;
       break;
   }
+
+  state.game.onHome = false;
+  modal.style.display = 'flex';
+
+  mainCharacter.src = mainCharacterFigures[1].src;
+  mainCharacter.alt = mainCharacterFigures[1].alt;
 }
 
 function displayHome() {
@@ -378,9 +449,33 @@ function displayHome() {
   mainCharacter.src = mainCharacterFigures[0].src;
   mainCharacter.alt = mainCharacterFigures[0].alt;
 
+  state.skills.currentSkill = 0;
+  state.aboutMe.currectRecord = 0;
+
+  toggleSideButton.style.display = 'none';
+
   guideList.innerHTML = `
     <li>Use left and right arrow keys to move.</li>
     <li>Use space to explore a collection.</li>
     <li>Shopkeeper explains about each collection.</li>
   `;
+}
+
+function toggleSide() {
+  if (state.aboutMe.side === 'front') {
+    slideImage.src = aboutMeInfo[state.aboutMe.currectRecord]['back-image'];
+    slideImage.alt = aboutMeInfo[state.aboutMe.currectRecord]['back-alt'];
+
+    toggleSideButton.textContent = 'Front side';
+
+    state.aboutMe.side = 'back';
+  }
+  else {
+    slideImage.src = aboutMeInfo[state.aboutMe.currectRecord]['front-image'];
+    slideImage.alt = aboutMeInfo[state.aboutMe.currectRecord]['front-alt'];
+
+    toggleSideButton.textContent = 'Back side';
+
+    state.aboutMe.side = 'front';
+  }
 }
