@@ -7,10 +7,10 @@ const mainCharacter = document.getElementById('main-character');
 const dialogueParagraph = document.getElementById('dialogue');
 const startMessage = document.getElementById('start-message');
 const guideList = document.getElementById('guide-list');
-const skillImage = document.getElementById('skill-image');
-const skillsModal = document.getElementById('skills-modal');
-const skillsSlidePreviousButton = document.getElementById('previous-button');
-const skillsSlideNextButton = document.getElementById('next-button');
+const slideImage = document.getElementById('slide-image');
+const modal = document.getElementById('modal');
+const SlidePreviousButton = document.getElementById('previous-button');
+const SlideNextButton = document.getElementById('next-button');
 
 const state = {
   mainCharacter: {
@@ -130,6 +130,23 @@ const mainCharacterFigures = [
   }
 ];
 
+const aboutMeText = {
+  text: `
+    I'm a front-end developer, I design with care,
+    Mixing art and code to make ideas share.
+    I build websites that are easy and bright,
+    Simple to use and a joy at first sight.
+
+    I studied computer engineering for my degree,
+    Now learning software, to grow and to be.
+    People say I'm careful, curious, and neat,
+    Organized, focused, and my work is complete.
+
+    If you want designs that are clear and true,
+    Let’s work together — I'd be glad to help you.
+  `
+}
+
 let intervalId;
 
 init();
@@ -189,7 +206,7 @@ document.body.addEventListener('keyup', (event) => {
       case ' ':
         switch (state.mainCharacter.position) {
           case 1:
-            displaySkillsModal();
+            displayModal();
             break;
         }
     }
@@ -200,13 +217,13 @@ document.body.addEventListener('keyup', (event) => {
         if (state.skills.currentSkill !== skills.length - 1) {
           state.skills.currentSkill++;
         }
-        displaySkillsModal();
+        displayModal();
         break;
       case 'ArrowLeft':
         if (state.skills.currentSkill !== 0) {
           state.skills.currentSkill--;
         }
-        displaySkillsModal();
+        displayModal();
         break;
       case 'Escape':
         displayHome();
@@ -223,18 +240,22 @@ mainCharacter.addEventListener('transitionend', (event) => {
   }
 });
 
-skillsSlidePreviousButton.addEventListener('click', () => {
-  if (state.skills.currentSkill !== 0) {
-    state.skills.currentSkill--;
+SlidePreviousButton.addEventListener('click', () => {
+  if (state.game.onSkillsModal) {
+    if (state.skills.currentSkill !== 0) {
+      state.skills.currentSkill--;
+    }
+    displayModal();
   }
-  displaySkillsModal();
 });
 
-skillsSlideNextButton.addEventListener('click', () => {
-  if (state.skills.currentSkill !== skills.length - 1) {
-    state.skills.currentSkill++;
+SlideNextButton.addEventListener('click', () => {
+  if (state.game.onSkillsModal) {
+    if (state.skills.currentSkill !== skills.length - 1) {
+      state.skills.currentSkill++;
+    }
+    displayModal();
   }
-  displaySkillsModal();
 });
 
 function init() {
@@ -324,21 +345,26 @@ function displayDialogue(dialogueNumber) {
   }
 }
 
-function displaySkillsModal() {
-  state.game.onHome = false;
-  state.game.onSkillsModal = true;
-  skillsModal.style.display = 'flex';
-
-  mainCharacter.src = mainCharacterFigures[1].src;
-  mainCharacter.alt = mainCharacterFigures[1].alt;
-
-  guideList.innerHTML = `
-    <li>Use left and right arrow keys, or mouse to explore skills.</li>
-    <li>Use Escape key to get back to home.</li>
-  `;
-
-  skillImage.src = skills[state.skills.currentSkill].image;
-  skillImage.alt = skills[state.skills.currentSkill].alt;
+function displayModal() {
+  console.log('here');
+  switch(state.mainCharacter.position){
+    case 1:
+      state.game.onHome = false;
+      state.game.onSkillsModal = true;
+      modal.style.display = 'flex';
+    
+      mainCharacter.src = mainCharacterFigures[1].src;
+      mainCharacter.alt = mainCharacterFigures[1].alt;
+    
+      guideList.innerHTML = `
+        <li>Use left and right arrow keys, or mouse to explore skills.</li>
+        <li>Use Escape key to get back to home.</li>
+      `;
+    
+      slideImage.src = skills[state.skills.currentSkill].image;
+      slideImage.alt = skills[state.skills.currentSkill].alt;
+      break;
+  }
 }
 
 function displayHome() {
@@ -347,7 +373,7 @@ function displayHome() {
   state.game.onAboutModal = false;
   state.game.onProjectsModal = false;
 
-  skillsModal.style.display = 'none';
+  modal.style.display = 'none';
 
   mainCharacter.src = mainCharacterFigures[0].src;
   mainCharacter.alt = mainCharacterFigures[0].alt;

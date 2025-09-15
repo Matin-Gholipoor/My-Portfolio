@@ -323,7 +323,7 @@ h2 {
   }
 }
 
-.modal {
+#modal {
   background-color: rgba(0, 0, 0, 60%);
 
   position: absolute;
@@ -337,7 +337,7 @@ h2 {
   align-items: center;
 }
 
-#skills-silde-container {
+#modal-silde-container {
   position: absolute;
   width: 400px;
   height: 200px;
@@ -351,7 +351,7 @@ h2 {
   transform: scaleX(-1);
 }
 
-.skills-silde-button {
+.silde-button {
   background: none;
   border: none;
 
@@ -360,10 +360,10 @@ h2 {
   cursor: pointer;
 }
 
-.skills-silde-button img {
+.silde-button img {
   width: 100%;
 }
 
-#skill-image {
+#slide-image {
   width: 60%;
 }
