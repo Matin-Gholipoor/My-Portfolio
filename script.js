@@ -150,20 +150,47 @@ const aboutMeInfo = [
     'back-image': 'assets/images/about me/about me - back.png',
     'back-alt': 'about me - back',
     'back-side-html': `
-        <p>
-          I'm a front-end developer, I design with care,
-          Mixing art and code to make ideas share.
-          I build websites that are easy and bright,
-          Simple to use and a joy at first sight.
-
-          I studied computer engineering for my degree,
-          Now learning software, to grow and to be.
-          People say I'm careful, curious, and neat,
-          Organized, focused, and my work is complete.
-
-          If you want designs that are clear and true,
-          Let's work together — I'd be glad to help you.
+        <p style="color: white;">
+          I'm a software developer and software engineering student passionate about front-end development, currently learning React. Most of my projects are personal passion projects where I experiment with blending code, art, music, and design. I pay close attention to details—because small touches make big differences in user experience. I'm seeking opportunities in front-end development where I can grow, collaborate, and create digital experiences that are both functional and artistic.
         </p>
+      `
+  },
+  {
+    name: 'eduction',
+    'front-image': 'assets/images/about me/education - front.png',
+    'front-alt': 'education - front',
+    'back-image': 'assets/images/about me/education - back.png',
+    'back-alt': 'education - back',
+    'back-side-html': `
+        <div>
+          <p style="color: var(--neon-orange);">
+            Bachelor: 
+          </p>
+          <p style="color: var(--neon-blue); padding-left: 5%">
+            University: 
+          </p>
+          <p style="color: black; padding-left: 10%">
+            Isfahan University of Technology
+          </p>
+          <p style="color: var(--neon-blue); padding-left: 5%">
+            GPA: 
+          </p>
+          <p style="color: black; padding-left: 10%">
+            16.7
+          </p>
+
+          <br>
+
+          <p style="color: var(--neon-orange);">
+            Master (In progress): 
+          </p>
+          <p style="color: var(--neon-blue); padding-left: 5%">
+            University: 
+          </p>
+          <p style="color: black; padding-left: 10%">
+            Isfahan University of Technology
+          </p>
+        </div>
       `
   },
   {
@@ -173,22 +200,39 @@ const aboutMeInfo = [
     'back-image': 'assets/images/about me/contact me - back.png',
     'back-alt': 'contact me - back',
     'back-side-html': `
-        <p>
+      <div style="height: 100%; display:flex; flex-direction:column; justify-content: center;">
+        <p style="color: white;">
           Github:
-          <a href="https://github.com/Matin-Gholipoor" target="_blank">github.com/Matin-Gholipoor</a>
+          <a 
+            href="https://github.com/Matin-Gholipoor" target="_blank"
+            style="color: lightblue;"
+          >
+            github.com/Matin-Gholipoor
+          </a>
         </p>
-        <p>
+        <p style="color: white;">
           Gmail:
-          <a href="mailto:matin.3108@gmail.com">matin.3108@gmail.com</a>
+          <a 
+            href="mailto:matin.3108@gmail.com"
+            style="color: lightblue;"
+          >
+            matin.3108@gmail.com
+          </a>
         </p>
-        <p>
+        <p style="color: white;">
           Phone: 0915 772 2400
         </p>
-        <p>
+        <p style="color: white;">
           Telegram:
-          <a href="https://t.me/Matin_Gholipour" target="_blank">t.me/Matin_Gholipour</a>
+          <a
+            href="https://t.me/Matin_Gholipour" target="_blank"
+            style="color: lightblue;"
+          >
+            t.me/Matin_Gholipour
+          </a>
         </p>
-      `
+      </div>
+    `
   }
 ];
 
@@ -435,6 +479,8 @@ function displayDialogue(dialogueNumber) {
 }
 
 function displayModal() {
+  state.aboutMe.side = 'front';
+
   switch (state.mainCharacter.position) {
     case 0:
       state.game.onAboutModal = true;
@@ -503,8 +549,11 @@ function displayHome() {
   SlidePreviousButton.style.visibility = 'hidden';
 
   modalSlideContainer.style.width = '50%';
+  slideImageContent.style.fontSize = '14px';
 
   state.slides.isZoomed = false;
+
+  state.aboutMe.side = 'front';
 
   guideList.innerHTML = `
     <li>Use left and right arrow keys to move.</li>

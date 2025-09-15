@@ -399,7 +399,6 @@ h2 {
 }
 
 #slide-image-content {
-  color: white;
   font-size: 14px;
 
   position: absolute;
@@ -408,6 +407,12 @@ h2 {
   padding: 10%;
 
   pointer-events: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 #slide-image-content a {
