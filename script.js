@@ -22,6 +22,7 @@ const shelf1 = document.getElementById('shelf-1');
 const shelf2 = document.getElementById('shelf-2');
 const shelf3 = document.getElementById('shelf-3');
 const backButton = document.getElementById('back-button');
+const crtMonitorEffect = document.getElementById("crt-effect");
 
 const state = {
   mainCharacter: {
@@ -336,18 +337,7 @@ volumeSlider.addEventListener('input', (event) => {
 document.body.addEventListener('keyup', (event) => {
   if (!state.game.isStarted) {
     if (event.key === ' ') {
-      startMessage.style.display = 'none';
-      guideList.style.display = 'block';
-
-      state.game.isStarted = true;
-      state.game.onHome = true;
-
-      document.querySelectorAll('.shelf').forEach((shelf) => {
-        shelf.style.pointerEvents = 'auto';
-      });
-
-      displayDialogue(0);
-      displayHome();
+      startGame();
     }
   }
   else if (state.game.onHome) {
@@ -516,6 +506,12 @@ shelf3.addEventListener('click', () => {
 });
 
 backButton.addEventListener('click', displayHome);
+
+crtMonitorEffect.addEventListener('click', () => {
+  if (!state.game.isStarted) {
+    startGame();
+  }
+});
 
 init();
 
@@ -846,4 +842,21 @@ function toggleZoom() {
 
     state.slides.isZoomed = true;
   }
+}
+
+function startGame() {
+  startMessage.style.display = 'none';
+  guideList.style.display = 'block';
+
+  state.game.isStarted = true;
+  state.game.onHome = true;
+
+  document.querySelectorAll('.shelf').forEach((shelf) => {
+    shelf.style.pointerEvents = 'auto';
+  });
+
+  crtMonitorEffect.style.pointerEvents = 'none';
+
+  displayDialogue(0);
+  displayHome();
 }
