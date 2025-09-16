@@ -32,12 +32,16 @@ const state = {
     onProjectsModal: false
   },
   slides: {
-    isZoomed: false
+    isZoomed: false,
   },
   skills: {
     currentSkill: 0
   },
   aboutMe: {
+    currectRecord: 0,
+    side: 'front',
+  },
+  projects: {
     currectRecord: 0,
     side: 'front',
   }
@@ -236,6 +240,69 @@ const aboutMeInfo = [
   }
 ];
 
+const projectsInfo = [
+  {
+    name: 'youtube clone with html, css',
+    'front-image': 'assets/images/projects/youtube clone with html, css - front.png',
+    'front-alt': 'youtube clone with html, css - front',
+    'back-image': 'assets/images/projects/youtube clone with html, css - back.png',
+    'back-alt': 'youtube clone with html, css - back',
+    'back-side-html': `
+        <p style="color: white;">
+          some text 1
+        </p>
+      `
+  },
+  {
+    name: 'miniprojects with html, css, js',
+    'front-image': 'assets/images/projects/miniprojects with html, css, js - front.png',
+    'front-alt': 'miniprojects with html, css, js - front',
+    'back-image': 'assets/images/projects/miniprojects with html, css, js - back.png',
+    'back-alt': 'miniprojects with html, css, js - back',
+    'back-side-html': `
+        <p style="color: white;">
+          some text 2
+        </p>
+      `
+  },
+  {
+    name: 'React Chatbot',
+    'front-image': 'assets/images/projects/React Chatbot - front.png',
+    'front-alt': 'React Chatbot',
+    'back-image': 'assets/images/projects/React Chatbot - back.png',
+    'back-alt': 'React Chatbot - back',
+    'back-side-html': `
+        <p style="color: white;">
+          some text 3
+        </p>
+      `
+  },
+  {
+    name: 'Ecommerce Website - React',
+    'front-image': 'assets/images/projects/Ecommerce Website - React - front.png',
+    'front-alt': 'Ecommerce Website - React - front',
+    'back-image': 'assets/images/projects/Ecommerce Website - React - back.png',
+    'back-alt': 'Ecommerce Website - React - back',
+    'back-side-html': `
+        <p style="color: white;">
+          some text 4
+        </p>
+      `
+  },
+  {
+    name: 'my portfolio',
+    'front-image': 'assets/images/projects/my portfolio - front.png',
+    'front-alt': 'my portfolio - front',
+    'back-image': 'assets/images/projects/my portfolio - back.png',
+    'back-alt': 'my portfolio - back',
+    'back-side-html': `
+        <p style="color: white;">
+          some text 5
+        </p>
+      `
+  }
+];
+
 let intervalId;
 
 init();
@@ -343,6 +410,28 @@ document.body.addEventListener('keyup', (event) => {
         displayHome();
     }
   }
+  else if (state.game.onProjectsModal) {
+    switch (event.key) {
+      case 'ArrowRight':
+        if (!state.slides.isZoomed) {
+          if (state.projects.currectRecord !== projectsInfo.length - 1) {
+            state.projects.currectRecord++;
+          }
+          displayModal();
+        }
+        break;
+      case 'ArrowLeft':
+        if (!state.slides.isZoomed) {
+          if (state.projects.currectRecord !== 0) {
+            state.projects.currectRecord--;
+          }
+          displayModal();
+        }
+        break;
+      case 'Escape':
+        displayHome();
+    }
+  }
 });
 
 mainCharacter.addEventListener('transitionend', (event) => {
@@ -366,6 +455,12 @@ SlidePreviousButton.addEventListener('click', () => {
     }
     displayModal();
   }
+  else if (state.game.onProjectsModal) {
+    if (state.projects.currectRecord !== 0) {
+      state.projects.currectRecord--;
+    }
+    displayModal();
+  }
 });
 
 SlideNextButton.addEventListener('click', () => {
@@ -378,6 +473,12 @@ SlideNextButton.addEventListener('click', () => {
   else if (state.game.onAboutModal) {
     if (state.aboutMe.currectRecord !== aboutMeInfo.length - 1) {
       state.aboutMe.currectRecord++;
+    }
+    displayModal();
+  }
+    else if (state.game.onProjectsModal) {
+    if (state.projects.currectRecord !== projectsInfo.length - 1) {
+      state.projects.currectRecord++;
     }
     displayModal();
   }
@@ -513,6 +614,23 @@ function displayModal() {
       toggleSideButton.style.display = 'none';
       break;
 
+    case 2:
+      state.game.onProjectsModal = true;
+
+      guideList.innerHTML = `
+        <li>Use left and right arrow keys, or click arrows to explore collection.</li>
+        <li>Use Escape key to get back to home.</li>
+        <li>Click on the record to zoom in and zoom out.</li>
+      `;
+
+      slideImage.src = projectsInfo[state.projects.currectRecord]['front-image'];
+      slideImage.alt = projectsInfo[state.projects.currectRecord]['front-alt'];
+
+      toggleSideButton.style.display = 'inline-block';
+      toggleSideButton.textContent = 'Back side';
+
+      break;
+
   }
 
   state.game.onHome = false;
@@ -540,9 +658,6 @@ function displayHome() {
   mainCharacter.src = mainCharacterFigures[0].src;
   mainCharacter.alt = mainCharacterFigures[0].alt;
 
-  state.skills.currentSkill = 0;
-  state.aboutMe.currectRecord = 0;
-
   modalBottomRow.style.visibility = 'hidden';
 
   SlideNextButton.style.visibility = 'hidden';
@@ -563,25 +678,49 @@ function displayHome() {
 }
 
 function toggleSide() {
-  if (state.aboutMe.side === 'front') {
-    slideImage.src = aboutMeInfo[state.aboutMe.currectRecord]['back-image'];
-    slideImage.alt = aboutMeInfo[state.aboutMe.currectRecord]['back-alt'];
+  if (state.game.onAboutModal) {
+    if (state.aboutMe.side === 'front') {
+      slideImage.src = aboutMeInfo[state.aboutMe.currectRecord]['back-image'];
+      slideImage.alt = aboutMeInfo[state.aboutMe.currectRecord]['back-alt'];
 
-    toggleSideButton.textContent = 'Front side';
+      toggleSideButton.textContent = 'Front side';
 
-    state.aboutMe.side = 'back';
+      state.aboutMe.side = 'back';
 
-    slideImageContent.innerHTML = aboutMeInfo[state.aboutMe.currectRecord]['back-side-html'];
+      slideImageContent.innerHTML = aboutMeInfo[state.aboutMe.currectRecord]['back-side-html'];
+    }
+    else {
+      slideImage.src = aboutMeInfo[state.aboutMe.currectRecord]['front-image'];
+      slideImage.alt = aboutMeInfo[state.aboutMe.currectRecord]['front-alt'];
+
+      toggleSideButton.textContent = 'Back side';
+
+      state.aboutMe.side = 'front';
+
+      slideImageContent.textContent = '';
+    }
   }
-  else {
-    slideImage.src = aboutMeInfo[state.aboutMe.currectRecord]['front-image'];
-    slideImage.alt = aboutMeInfo[state.aboutMe.currectRecord]['front-alt'];
+  else if (state.game.onProjectsModal) {
+    if (state.projects.side === 'front') {
+      slideImage.src = projectsInfo[state.projects.currectRecord]['back-image'];
+      slideImage.alt = projectsInfo[state.projects.currectRecord]['back-alt'];
 
-    toggleSideButton.textContent = 'Back side';
+      toggleSideButton.textContent = 'Front side';
 
-    state.aboutMe.side = 'front';
+      state.projects.side = 'back';
 
-    slideImageContent.textContent = '';
+      slideImageContent.innerHTML = projectsInfo[state.projects.currectRecord]['back-side-html'];
+    }
+    else {
+      slideImage.src = projectsInfo[state.projects.currectRecord]['front-image'];
+      slideImage.alt = projectsInfo[state.projects.currectRecord]['front-alt'];
+
+      toggleSideButton.textContent = 'Back side';
+
+      state.projects.side = 'front';
+
+      slideImageContent.textContent = '';
+    }
   }
 }
 
