@@ -11,11 +11,13 @@ const slideImage = document.getElementById('slide-image');
 const modal = document.getElementById('modal');
 const SlidePreviousButton = document.getElementById('previous-button');
 const SlideNextButton = document.getElementById('next-button');
-const modalBottomRow = document.getElementById('modal-buttom-row');
+const modalBottomRow = document.getElementById('modal-bottom-row');
 const toggleSideButton = document.getElementById('toggle-side-button');
 const slideImageContainer = document.getElementById('slide-image-container');
 const slideImageContent = document.getElementById('slide-image-content');
-const modalSlideContainer = document.getElementById('modal-silde-container');
+const modalSlideContainer = document.getElementById('modal-slide-container');
+const levelContainer = document.getElementById('level-container');
+const levelProgressBar = document.getElementById('level-progress-bar');
 
 const state = {
   mainCharacter: {
@@ -50,67 +52,67 @@ const skillsInfo = [
     name: 'JavaScript',
     image: 'assets/images/skills/JavaScript.png',
     alt: 'JavaScript',
-    level: 100
+    level: 10
   },
   {
     name: 'HTML-CSS',
     image: 'assets/images/skills/HTML-CSS.png',
     alt: 'HTML-CSS',
-    level: 100
+    level: 10
   },
   {
     name: 'React',
     image: 'assets/images/skills/react.png',
     alt: 'React',
-    level: 100
+    level: 10
   },
   {
     name: 'C/C++',
     image: 'assets/images/skills/C-C++.png',
     alt: 'C/C++',
-    level: 100
+    level: 10
   },
   {
     name: 'Python',
     image: 'assets/images/skills/python.png',
     alt: 'Python',
-    level: 40
+    level: 4
   },
   {
     name: 'Git',
     image: 'assets/images/skills/git.png',
     alt: 'Git',
-    level: 80
+    level: 8
   },
   {
     name: 'Linux',
     image: 'assets/images/skills/linux.png',
     alt: 'Linux',
-    level: 70
+    level: 7
   },
   {
     name: 'Qt',
     image: 'assets/images/skills/qt.png',
     alt: 'Qt',
-    level: 40
+    level: 4
   },
   {
     name: 'English',
     image: 'assets/images/skills/english.png',
     alt: 'English',
-    level: 100
+    level: 10
   },
   {
     name: 'Photoshop',
     image: 'assets/images/skills/photoshop.png',
     alt: 'Photoshop',
-    level: 80
+    level: 8
   },
   {
     name: 'Autocad',
     image: 'assets/images/skills/autocad.png',
     alt: 'Autocad',
-    level: 50
+    level: 5
   }
 ];
 
@@ -145,7 +147,7 @@ const aboutMeInfo = [
     'back-image': 'assets/images/about me/about me - back.png',
     'back-alt': 'about me - back',
     'back-side-html': `
-        <p style="color: white;">
+        <p class="white">
           I'm a software developer and software engineering student passionate about front-end development, currently learning React. Most of my projects are personal passion projects where I experiment with blending code, art, music, and design. I pay close attention to details—because small touches make big differences in user experience. I'm seeking opportunities in front-end development where I can grow, collaborate, and create digital experiences that are both functional and artistic.
         </p>
       `
@@ -196,7 +198,7 @@ const aboutMeInfo = [
     'back-alt': 'contact me - back',
     'back-side-html': `
       <div style="height: 100%; display:flex; flex-direction:column; justify-content: center;">
-        <p style="color: white;">
+        <p class="white">
           Github:
           <a 
             href="https://github.com/Matin-Gholipoor" target="_blank"
@@ -205,7 +207,7 @@ const aboutMeInfo = [
             github.com/Matin-Gholipoor
           </a>
         </p>
-        <p style="color: white;">
+        <p class="white">
           Gmail:
           <a 
             href="mailto:matin.3108@gmail.com"
@@ -214,10 +216,10 @@ const aboutMeInfo = [
             matin.3108@gmail.com
           </a>
         </p>
-        <p style="color: white;">
+        <p class="white">
           Phone: 0915 772 2400
         </p>
-        <p style="color: white;">
+        <p class="white">
           Telegram:
           <a
             href="https://t.me/Matin_Gholipour" target="_blank"
@@ -239,7 +241,7 @@ const projectsInfo = [
     'back-image': 'assets/images/projects/youtube clone with html, css - back.png',
     'back-alt': 'youtube clone with html, css - back',
     'back-side-html': `
-        <p style="color: white;">
+        <p class="white">
           some text 1
         </p>
       `
@@ -251,7 +253,7 @@ const projectsInfo = [
     'back-image': 'assets/images/projects/miniprojects with html, css, js - back.png',
     'back-alt': 'miniprojects with html, css, js - back',
     'back-side-html': `
-        <p style="color: white;">
+        <p class="white">
           some text 2
         </p>
       `
@@ -263,7 +265,7 @@ const projectsInfo = [
     'back-image': 'assets/images/projects/React Chatbot - back.png',
     'back-alt': 'React Chatbot - back',
     'back-side-html': `
-        <p style="color: white;">
+        <p class="white">
           some text 3
         </p>
       `
@@ -275,7 +277,7 @@ const projectsInfo = [
     'back-image': 'assets/images/projects/Ecommerce Website - React - back.png',
     'back-alt': 'Ecommerce Website - React - back',
     'back-side-html': `
-        <p style="color: white;">
+        <p class="white">
           some text 4
         </p>
       `
@@ -287,7 +289,7 @@ const projectsInfo = [
     'back-image': 'assets/images/projects/my portfolio - back.png',
     'back-alt': 'my portfolio - back',
     'back-side-html': `
-        <p style="color: white;">
+        <p class="white">
           some text 5
         </p>
       `
@@ -566,6 +568,8 @@ function displayModal() {
       slideImage.src = aboutMeInfo[state.slides.currentRecord]['front-image'];
       slideImage.alt = aboutMeInfo[state.slides.currentRecord]['front-alt'];
 
+      levelContainer.style.display = 'none';
+
       toggleSideButton.style.display = 'inline-block';
       toggleSideButton.textContent = 'Back side';
 
@@ -583,6 +587,13 @@ function displayModal() {
       slideImage.alt = skillsInfo[state.slides.currentRecord].alt;
 
       toggleSideButton.style.display = 'none';
+
+      levelContainer.style.display = 'flex';
+      levelProgressBar.innerHTML = '';
+      for (let i = 0; i < skillsInfo[state.slides.currentRecord].level; i++) {
+        levelProgressBar.innerHTML += '<div class="level-progress"></div>';
+      }
+
       break;
 
     case 2:
@@ -597,6 +608,8 @@ function displayModal() {
       slideImage.src = projectsInfo[state.slides.currentRecord]['front-image'];
       slideImage.alt = projectsInfo[state.slides.currentRecord]['front-alt'];
 
+      levelContainer.style.display = 'none';
+
       toggleSideButton.style.display = 'inline-block';
       toggleSideButton.textContent = 'Back side';
 
@@ -610,7 +623,7 @@ function displayModal() {
   mainCharacter.src = mainCharacterFigures[1].src;
   mainCharacter.alt = mainCharacterFigures[1].alt;
 
-  modalBottomRow.style.visibility = 'visible';
+  modalBottomRow.style.display = 'flex';
 
   SlideNextButton.style.visibility = 'visible';
   SlidePreviousButton.style.visibility = 'visible';
@@ -629,7 +642,7 @@ function displayHome() {
   mainCharacter.src = mainCharacterFigures[0].src;
   mainCharacter.alt = mainCharacterFigures[0].alt;
 
-  modalBottomRow.style.visibility = 'hidden';
+  modalBottomRow.style.display = 'none';
 
   SlideNextButton.style.visibility = 'hidden';
   SlidePreviousButton.style.visibility = 'hidden';
@@ -699,7 +712,7 @@ function toggleZoom() {
   if (state.slides.isZoomed) {
     modalSlideContainer.style.width = '50%';
 
-    modalBottomRow.style.visibility = 'visible';
+    modalBottomRow.style.display = 'flex';
 
     SlideNextButton.style.visibility = 'visible';
     SlidePreviousButton.style.visibility = 'visible';
@@ -711,7 +724,7 @@ function toggleZoom() {
   else {
     modalSlideContainer.style.width = '75%';
 
-    modalBottomRow.style.visibility = 'hidden';
+    modalBottomRow.style.display = 'none';
 
     SlideNextButton.style.visibility = 'hidden';
     SlidePreviousButton.style.visibility = 'hidden';

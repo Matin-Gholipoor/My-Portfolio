@@ -30,7 +30,11 @@ p {
   margin: 0;
 }
 
-.blue-neon-border {
+.white {
+  color: white;
+}
+
+.neon-blue-border {
   border: 2px solid var(--neon-blue);
   border-radius: 10px;
   box-shadow: 0 0 10px var(--neon-blue),
@@ -40,7 +44,7 @@ p {
   text-align: center;
 }
 
-.pink-neon-border {
+.neon-pink-border {
   border: 2px solid var(--neon-pink);
   border-radius: 10px;
   box-shadow: 0 0 10px var(--neon-pink),
@@ -329,18 +333,19 @@ h2 {
   background-color: rgba(0, 0, 0, 60%);
 
   position: absolute;
-  width: 95%;
-  height: 95%;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
 
   z-index: 98;
 
   display: none;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-#modal-silde-container {
-  position: absolute;
+#modal-slide-container {
   width: 50%;
 
   display: flex;
@@ -352,7 +357,7 @@ h2 {
   transform: scaleX(-1);
 }
 
-.silde-button {
+.slide-button {
   background: none;
   border: none;
 
@@ -361,7 +366,7 @@ h2 {
   cursor: pointer;
 }
 
-.silde-button img {
+.slide-button img {
   width: 100%;
 }
 
@@ -381,10 +386,12 @@ h2 {
   cursor: pointer;
 }
 
-#modal-buttom-row {
-  position: absolute;
+#modal-bottom-row {
+  width: 50%;
 
-  transform: translateY(160px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #toggle-side-button {
@@ -417,4 +424,38 @@ h2 {
 
 #slide-image-content a {
   pointer-events: auto;
+}
+
+#level-container {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#level-container p {
+  display: inline-block;
+}
+
+#level-progress-bar {
+  background-color: lightgray;
+  border: 2px solid gray;
+
+  flex: 0.6;
+  height: 15px;
+
+  margin: 10px;
+
+  display: flex;
+  justify-content: left;
+}
+
+.level-progress {
+  background-color: rgb(80, 176, 80);
+  border: 1px solid green;
+  border-block: none;
+
+  width: 10%;
+  height: 100%;
 }
