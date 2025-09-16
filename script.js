@@ -41,7 +41,9 @@ const state = {
   slides: {
     isZoomed: false,
     currentRecord: 0,
-    side: 'front'
+    side: 'front',
+    lastSlide: false,
+    firstSlide: false
   }
 };
 
@@ -693,6 +695,8 @@ function displayModal() {
 
   SlideNextButton.style.visibility = 'visible';
   SlidePreviousButton.style.visibility = 'visible';
+  state.slides.lastSlide = false;
+  state.slides.firstSlide = false;
 
   backButton.style.visibility = 'visible';
 
@@ -703,34 +707,26 @@ function displayModal() {
     case 0:
       if (state.slides.currentRecord === aboutMeInfo.length - 1) {
         SlideNextButton.style.visibility = 'hidden';
-      }
-      else {
-        SlideNextButton.style.visibility = 'visible';
+        state.slides.lastSlide = true;
       }
       break;
     case 1:
       if (state.slides.currentRecord === skillsInfo.length - 1) {
         SlideNextButton.style.visibility = 'hidden';
-      }
-      else {
-        SlideNextButton.style.visibility = 'visible';
+        state.slides.lastSlide = true;
       }
       break;
     case 2:
       if (state.slides.currentRecord === projectsInfo.length - 1) {
         SlideNextButton.style.visibility = 'hidden';
-      }
-      else {
-        SlideNextButton.style.visibility = 'visible';
+        state.slides.lastSlide = true;
       }
       break;
   }
   // cheking wether to display previous button
   if (state.slides.currentRecord === 0) {
     SlidePreviousButton.style.visibility = 'hidden';
-  }
-  else {
-    SlidePreviousButton.style.visibility = 'visible';
+    state.slides.firstSlide = true;
   }
 }
 
@@ -819,8 +815,12 @@ function toggleZoom() {
 
     modalBottomRow.style.display = 'flex';
 
-    SlideNextButton.style.visibility = 'visible';
-    SlidePreviousButton.style.visibility = 'visible';
+    if (!state.slides.lastSlide) {
+      SlideNextButton.style.visibility = 'visible';
+    }
+    if (!state.slides.firstSlide) {
+      SlidePreviousButton.style.visibility = 'visible';
+    }
 
     backButton.style.visibility = 'visible';
 
