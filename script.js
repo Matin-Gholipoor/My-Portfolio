@@ -21,6 +21,7 @@ const levelProgressBar = document.getElementById('level-progress-bar');
 const shelf1 = document.getElementById('shelf-1');
 const shelf2 = document.getElementById('shelf-2');
 const shelf3 = document.getElementById('shelf-3');
+const backButton = document.getElementById('back-button');
 
 const state = {
   mainCharacter: {
@@ -514,6 +515,8 @@ shelf3.addEventListener('click', () => {
   }
 });
 
+backButton.addEventListener('click', displayHome);
+
 init();
 
 function init() {
@@ -695,6 +698,8 @@ function displayModal() {
   SlideNextButton.style.visibility = 'visible';
   SlidePreviousButton.style.visibility = 'visible';
 
+  backButton.style.visibility = 'visible';
+
   slideImageContent.innerHTML = '';
 
   // checking wether to display next button
@@ -748,6 +753,8 @@ function displayHome() {
 
   SlideNextButton.style.visibility = 'hidden';
   SlidePreviousButton.style.visibility = 'hidden';
+
+  backButton.style.visibility = 'hidden';
 
   modalSlideContainer.style.width = '50%';
   slideImageContent.style.fontSize = '14px';
@@ -819,6 +826,8 @@ function toggleZoom() {
     SlideNextButton.style.visibility = 'visible';
     SlidePreviousButton.style.visibility = 'visible';
 
+    backButton.style.visibility = 'visible';
+
     slideImageContent.style.fontSize = '14px';
 
     state.slides.isZoomed = false;
@@ -830,6 +839,8 @@ function toggleZoom() {
 
     SlideNextButton.style.visibility = 'hidden';
     SlidePreviousButton.style.visibility = 'hidden';
+
+    backButton.style.visibility = 'hidden';
 
     slideImageContent.style.fontSize = '21.5px';
 
