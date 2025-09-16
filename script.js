@@ -629,6 +629,41 @@ function displayModal() {
   SlidePreviousButton.style.visibility = 'visible';
 
   slideImageContent.innerHTML = '';
+
+  // checking wether to display next button
+  switch (state.mainCharacter.position) {
+    case 0:
+      if (state.slides.currentRecord === aboutMeInfo.length - 1) {
+        SlideNextButton.style.visibility = 'hidden';
+      }
+      else {
+        SlideNextButton.style.visibility = 'visible';
+      }
+      break;
+    case 1:
+      if (state.slides.currentRecord === skillsInfo.length - 1) {
+        SlideNextButton.style.visibility = 'hidden';
+      }
+      else {
+        SlideNextButton.style.visibility = 'visible';
+      }
+      break;
+    case 2:
+      if (state.slides.currentRecord === projectsInfo.length - 1) {
+        SlideNextButton.style.visibility = 'hidden';
+      }
+      else {
+        SlideNextButton.style.visibility = 'visible';
+      }
+      break;
+  }
+  // cheking wether to display previous button
+  if (state.slides.currentRecord === 0) {
+    SlidePreviousButton.style.visibility = 'hidden';
+  }
+  else {
+    SlidePreviousButton.style.visibility = 'visible';
+  }
 }
 
 function displayHome() {
