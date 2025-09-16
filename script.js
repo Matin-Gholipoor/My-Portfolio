@@ -33,17 +33,8 @@ const state = {
   },
   slides: {
     isZoomed: false,
-  },
-  skills: {
-    currentSkill: 0
-  },
-  aboutMe: {
-    currectRecord: 0,
-    side: 'front',
-  },
-  projects: {
-    currectRecord: 0,
-    side: 'front',
+    currentRecord: 0,
+    side: 'front'
   }
 };
 
@@ -305,8 +296,6 @@ const projectsInfo = [
 
 let intervalId;
 
-init();
-
 volumeUpIcon.addEventListener('click', () => {
   music.pause();
   music.muted = true;
@@ -370,16 +359,16 @@ document.body.addEventListener('keyup', (event) => {
     switch (event.key) {
       case 'ArrowRight':
         if (!state.slides.isZoomed) {
-          if (state.skills.currentSkill !== skillsInfo.length - 1) {
-            state.skills.currentSkill++;
+          if (state.slides.currentRecord !== skillsInfo.length - 1) {
+            state.slides.currentRecord++;
           }
           displayModal();
         }
         break;
       case 'ArrowLeft':
         if (!state.slides.isZoomed) {
-          if (state.skills.currentSkill !== 0) {
-            state.skills.currentSkill--;
+          if (state.slides.currentRecord !== 0) {
+            state.slides.currentRecord--;
           }
           displayModal();
         }
@@ -392,16 +381,16 @@ document.body.addEventListener('keyup', (event) => {
     switch (event.key) {
       case 'ArrowRight':
         if (!state.slides.isZoomed) {
-          if (state.aboutMe.currectRecord !== aboutMeInfo.length - 1) {
-            state.aboutMe.currectRecord++;
+          if (state.slides.currentRecord !== aboutMeInfo.length - 1) {
+            state.slides.currentRecord++;
           }
           displayModal();
         }
         break;
       case 'ArrowLeft':
         if (!state.slides.isZoomed) {
-          if (state.aboutMe.currectRecord !== 0) {
-            state.aboutMe.currectRecord--;
+          if (state.slides.currentRecord !== 0) {
+            state.slides.currentRecord--;
           }
           displayModal();
         }
@@ -414,16 +403,16 @@ document.body.addEventListener('keyup', (event) => {
     switch (event.key) {
       case 'ArrowRight':
         if (!state.slides.isZoomed) {
-          if (state.projects.currectRecord !== projectsInfo.length - 1) {
-            state.projects.currectRecord++;
+          if (state.slides.currentRecord !== projectsInfo.length - 1) {
+            state.slides.currentRecord++;
           }
           displayModal();
         }
         break;
       case 'ArrowLeft':
         if (!state.slides.isZoomed) {
-          if (state.projects.currectRecord !== 0) {
-            state.projects.currectRecord--;
+          if (state.slides.currentRecord !== 0) {
+            state.slides.currentRecord--;
           }
           displayModal();
         }
@@ -437,60 +426,44 @@ document.body.addEventListener('keyup', (event) => {
 mainCharacter.addEventListener('transitionend', (event) => {
   if (event.propertyName === 'transform') {
     endMainCharacterMovement().then(() => {
-      displayDialogue(Number(state.mainCharacter.position));
+      displayDialogue(state.mainCharacter.position);
     });
   }
 });
 
 SlidePreviousButton.addEventListener('click', () => {
-  if (state.game.onSkillsModal) {
-    if (state.skills.currentSkill !== 0) {
-      state.skills.currentSkill--;
-    }
-    displayModal();
+  if (state.slides.currentRecord !== 0) {
+    state.slides.currentRecord--;
   }
-  else if (state.game.onAboutModal) {
-    if (state.aboutMe.currectRecord !== 0) {
-      state.aboutMe.currectRecord--;
-    }
-    displayModal();
-  }
-  else if (state.game.onProjectsModal) {
-    if (state.projects.currectRecord !== 0) {
-      state.projects.currectRecord--;
-    }
-    displayModal();
-  }
+  displayModal();
 });
 
 SlideNextButton.addEventListener('click', () => {
   if (state.game.onSkillsModal) {
-    if (state.skills.currentSkill !== skillsInfo.length - 1) {
-      state.skills.currentSkill++;
+    if (state.slides.currentRecord !== skillsInfo.length - 1) {
+      state.slides.currentRecord++;
     }
     displayModal();
   }
   else if (state.game.onAboutModal) {
-    if (state.aboutMe.currectRecord !== aboutMeInfo.length - 1) {
-      state.aboutMe.currectRecord++;
+    if (state.slides.currentRecord !== aboutMeInfo.length - 1) {
+      state.slides.currentRecord++;
     }
     displayModal();
   }
-    else if (state.game.onProjectsModal) {
-    if (state.projects.currectRecord !== projectsInfo.length - 1) {
-      state.projects.currectRecord++;
+  else if (state.game.onProjectsModal) {
+    if (state.slides.currentRecord !== projectsInfo.length - 1) {
+      state.slides.currentRecord++;
     }
     displayModal();
   }
 });
 
-toggleSideButton.addEventListener('click', () => {
-  toggleSide();
-});
+toggleSideButton.addEventListener('click', toggleSide);
 
-slideImage.addEventListener('click', () => {
-  toggleZoom();
-});
+slideImage.addEventListener('click', toggleZoom);
+
+init();
 
 function init() {
   music.muted = true;
@@ -580,8 +553,6 @@ function displayDialogue(dialogueNumber) {
 }
 
 function displayModal() {
-  state.aboutMe.side = 'front';
-
   switch (state.mainCharacter.position) {
     case 0:
       state.game.onAboutModal = true;
@@ -592,8 +563,8 @@ function displayModal() {
         <li>Click on the record to zoom in and zoom out.</li>
       `;
 
-      slideImage.src = aboutMeInfo[state.aboutMe.currectRecord]['front-image'];
-      slideImage.alt = aboutMeInfo[state.aboutMe.currectRecord]['front-alt'];
+      slideImage.src = aboutMeInfo[state.slides.currentRecord]['front-image'];
+      slideImage.alt = aboutMeInfo[state.slides.currentRecord]['front-alt'];
 
       toggleSideButton.style.display = 'inline-block';
       toggleSideButton.textContent = 'Back side';
@@ -608,8 +579,8 @@ function displayModal() {
         <li>Use Escape key to get back to home.</li>
       `;
 
-      slideImage.src = skillsInfo[state.skills.currentSkill].image;
-      slideImage.alt = skillsInfo[state.skills.currentSkill].alt;
+      slideImage.src = skillsInfo[state.slides.currentRecord].image;
+      slideImage.alt = skillsInfo[state.slides.currentRecord].alt;
 
       toggleSideButton.style.display = 'none';
       break;
@@ -623,8 +594,8 @@ function displayModal() {
         <li>Click on the record to zoom in and zoom out.</li>
       `;
 
-      slideImage.src = projectsInfo[state.projects.currectRecord]['front-image'];
-      slideImage.alt = projectsInfo[state.projects.currectRecord]['front-alt'];
+      slideImage.src = projectsInfo[state.slides.currentRecord]['front-image'];
+      slideImage.alt = projectsInfo[state.slides.currentRecord]['front-alt'];
 
       toggleSideButton.style.display = 'inline-block';
       toggleSideButton.textContent = 'Back side';
@@ -666,9 +637,9 @@ function displayHome() {
   modalSlideContainer.style.width = '50%';
   slideImageContent.style.fontSize = '14px';
 
+  state.slides.side = 'front';
+  state.slides.currentRecord = 0;
   state.slides.isZoomed = false;
-
-  state.aboutMe.side = 'front';
 
   guideList.innerHTML = `
     <li>Use left and right arrow keys to move.</li>
@@ -679,45 +650,45 @@ function displayHome() {
 
 function toggleSide() {
   if (state.game.onAboutModal) {
-    if (state.aboutMe.side === 'front') {
-      slideImage.src = aboutMeInfo[state.aboutMe.currectRecord]['back-image'];
-      slideImage.alt = aboutMeInfo[state.aboutMe.currectRecord]['back-alt'];
+    if (state.slides.side === 'front') {
+      slideImage.src = aboutMeInfo[state.slides.currentRecord]['back-image'];
+      slideImage.alt = aboutMeInfo[state.slides.currentRecord]['back-alt'];
 
       toggleSideButton.textContent = 'Front side';
 
-      state.aboutMe.side = 'back';
+      state.slides.side = 'back';
 
-      slideImageContent.innerHTML = aboutMeInfo[state.aboutMe.currectRecord]['back-side-html'];
+      slideImageContent.innerHTML = aboutMeInfo[state.slides.currentRecord]['back-side-html'];
     }
     else {
-      slideImage.src = aboutMeInfo[state.aboutMe.currectRecord]['front-image'];
-      slideImage.alt = aboutMeInfo[state.aboutMe.currectRecord]['front-alt'];
+      slideImage.src = aboutMeInfo[state.slides.currentRecord]['front-image'];
+      slideImage.alt = aboutMeInfo[state.slides.currentRecord]['front-alt'];
 
       toggleSideButton.textContent = 'Back side';
 
-      state.aboutMe.side = 'front';
+      state.slides.side = 'front';
 
       slideImageContent.textContent = '';
     }
   }
   else if (state.game.onProjectsModal) {
-    if (state.projects.side === 'front') {
-      slideImage.src = projectsInfo[state.projects.currectRecord]['back-image'];
-      slideImage.alt = projectsInfo[state.projects.currectRecord]['back-alt'];
+    if (state.slides.side === 'front') {
+      slideImage.src = projectsInfo[state.slides.currentRecord]['back-image'];
+      slideImage.alt = projectsInfo[state.slides.currentRecord]['back-alt'];
 
       toggleSideButton.textContent = 'Front side';
 
-      state.projects.side = 'back';
+      state.slides.side = 'back';
 
-      slideImageContent.innerHTML = projectsInfo[state.projects.currectRecord]['back-side-html'];
+      slideImageContent.innerHTML = projectsInfo[state.slides.currentRecord]['back-side-html'];
     }
     else {
-      slideImage.src = projectsInfo[state.projects.currectRecord]['front-image'];
-      slideImage.alt = projectsInfo[state.projects.currectRecord]['front-alt'];
+      slideImage.src = projectsInfo[state.slides.currentRecord]['front-image'];
+      slideImage.alt = projectsInfo[state.slides.currentRecord]['front-alt'];
 
       toggleSideButton.textContent = 'Back side';
 
-      state.projects.side = 'front';
+      state.slides.side = 'front';
 
       slideImageContent.textContent = '';
     }
