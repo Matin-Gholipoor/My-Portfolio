@@ -34,9 +34,14 @@ p {
   color: white;
 }
 
-.neon-yellow{
+.neon-yellow {
   color: var(--neon-yellow);
   text-shadow: 0 0 7px var(--neon-yellow);
+}
+
+.neon-blue {
+  color: var(--neon-blue);
+  text-shadow: 0 0 7px var(--neon-blue);
 }
 
 .neon-blue-border {
@@ -103,13 +108,11 @@ aside {
   padding: 20px;
 }
 
-.settings-section {
-  margin-bottom: 10px;
-}
-
 .volume-row {
   display: flex;
   align-items: centers;
+  justify-content: space-between;
+  width: 100%;
 
   column-gap: 10px;
 
@@ -139,10 +142,6 @@ aside {
 
 .volume-row input::-webkit-slider-thumb {
   visibility: hidden;
-}
-
-#volume-display {
-  text-align: left;
 }
 
 #guide-list {
