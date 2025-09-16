@@ -248,9 +248,29 @@ const projectsInfo = [
     'back-image': 'assets/images/projects/youtube clone with html, css - back.png',
     'back-alt': 'youtube clone with html, css - back',
     'back-side-html': `
-        <p class="white">
-          some text 1
-        </p>
+        <div>
+          <p class="white">
+            Github repository:
+            <a
+              href="https://github.com/Matin-Gholipoor/YouTube-Home-Page-Clone-HTML-CSS" target="_blank"
+              style="color: lightblue;"
+            >
+              github.com/Matin-Gholipoor/YouTube-Home-Page-Clone-HTML-CSS
+            </a>
+          </p>
+
+          <br>
+
+          <p class="white">
+            See the project:
+            <a
+              href="https://matin-gholipoor.github.io/YouTube-Home-Page-Clone-HTML-CSS/" target="_blank"
+              style="color: lightblue;"
+            >
+              matin-gholipoor.github.io/YouTube-Home-Page-Clone-HTML-CSS
+            </a>
+          </p>
+        </div>
       `
   },
   {
@@ -260,9 +280,32 @@ const projectsInfo = [
     'back-image': 'assets/images/projects/miniprojects with html, css, js - back.png',
     'back-alt': 'miniprojects with html, css, js - back',
     'back-side-html': `
-        <p class="white">
-          some text 2
-        </p>
+        <div>
+          <p class="white">
+            Github repository:
+            <a
+              href="https://github.com/Matin-Gholipoor/Mini-projects-with-JavaScript-HTML-CSS" target="_blank"
+              style="color: lightblue;"
+            >
+              github.com/Matin-Gholipoor/Mini-projects-with-JavaScript-HTML-CSS
+            </a>
+          </p>
+
+          <br>
+
+          <p class="white">
+            See the project:
+            <a
+              href="https://matin-gholipoor.github.io/Mini-projects-with-JavaScript-HTML-CSS/" target="_blank"
+              style="color: lightblue;"
+            >
+              matin-gholipoor.github.io/Mini-projects-with-JavaScript-HTML-CSS
+            </a>
+          </p>
+          <p class="neon-orange">
+            At the end of the opened page, click on the project you want to see.
+          </p>
+        </div>
       `
   },
   {
@@ -272,9 +315,29 @@ const projectsInfo = [
     'back-image': 'assets/images/projects/React Chatbot - back.png',
     'back-alt': 'React Chatbot - back',
     'back-side-html': `
-        <p class="white">
-          some text 3
-        </p>
+        <div>
+          <p class="white">
+            Github repository:
+            <a
+              href="https://github.com/Matin-Gholipoor/Chatbot-React" target="_blank"
+              style="color: lightblue;"
+            >
+              github.com/Matin-Gholipoor/Chatbot-React
+            </a>
+          </p>
+
+          <br>
+
+          <p class="white">
+            See the project:
+            <a
+              href="https://matin-gholipoor.github.io/Chatbot-React/" target="_blank"
+              style="color: lightblue;"
+            >
+              matin-gholipoor.github.io/Chatbot-React
+            </a>
+          </p>
+        </div>
       `
   },
   {
@@ -284,9 +347,17 @@ const projectsInfo = [
     'back-image': 'assets/images/projects/Ecommerce Website - React - back.png',
     'back-alt': 'Ecommerce Website - React - back',
     'back-side-html': `
-        <p class="white">
-          some text 4
-        </p>
+        <div>
+          <p class="white">
+            Github repository:
+            <a
+              href="https://github.com/Matin-Gholipoor/Ecommerce-website-React" target="_blank"
+              style="color: lightblue;"
+            >
+              github.com/Matin-Gholipoor/Ecommerce-website-React
+            </a>
+          </p>
+        </div>
       `
   },
   {
@@ -722,6 +793,8 @@ function displayModal() {
   SlidePreviousButton.style.visibility = 'visible';
   state.slides.lastSlide = false;
   state.slides.firstSlide = false;
+
+  state.slides.side = 'front';
 
   backButton.style.visibility = 'visible';
 
