@@ -336,6 +336,10 @@ volumeSlider.addEventListener('input', (event) => {
   music.volume = volumeSlider.value / 100;
 });
 
+volumeSlider.addEventListener('keydown', (event) => {
+  event.preventDefault();
+});
+
 document.body.addEventListener('keyup', (event) => {
   if (!state.game.isStarted) {
     if (event.key === ' ') {
