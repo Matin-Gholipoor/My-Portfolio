@@ -350,7 +350,7 @@ document.body.addEventListener('keyup', (event) => {
       case 'ArrowLeft':
         moveMainCharacter('left', 1);
         break;
-      case ' ':
+      case 'Enter':
         if (!state.mainCharacter.isMoving) {
           displayModal();
         }
@@ -377,6 +377,10 @@ document.body.addEventListener('keyup', (event) => {
         break;
       case 'Escape':
         displayHome();
+        break;
+      case 'Enter':
+        toggleZoom();
+        break;
     }
   }
   else if (state.game.onAboutModal) {
@@ -399,6 +403,13 @@ document.body.addEventListener('keyup', (event) => {
         break;
       case 'Escape':
         displayHome();
+        break;
+      case 'Enter':
+        toggleZoom();
+        break;
+      case ' ':
+        toggleSide();
+        break;
     }
   }
   else if (state.game.onProjectsModal) {
@@ -421,6 +432,13 @@ document.body.addEventListener('keyup', (event) => {
         break;
       case 'Escape':
         displayHome();
+        break;
+      case 'Enter':
+        toggleZoom();
+        break;
+      case ' ':
+        toggleSide();
+        break;
     }
   }
 });
@@ -628,9 +646,10 @@ function displayModal() {
       state.game.onAboutModal = true;
 
       guideList.innerHTML = `
-        <li>Use left and right arrow keys, or click arrows to explore collection.</li>
-        <li>Use Escape key to get back to home.</li>
-        <li>Click on the record to zoom in and zoom out.</li>
+        <li>Explore collection with <span class="neon-yellow">Left</span> and <span class="neon-yellow">right arrows</span> using <span class="neon-yellow">keyboard</span> or <span class="neon-yellow">mouse</span>.</li>
+        <li>Get back to Home with <span class="neon-yellow">Back button</span> above or <span class="neon-yellow">Escape</span>.</li>
+        <li>Zoom in and out with <span class="neon-yellow">Enter</span> or <span class="neon-yellow">click on the record</span>.</li>
+        <li>Flip cover with <span class="neon-yellow">space</span> or <span class="neon-yellow">Side button</span> below.</li>
       `;
 
       slideImage.src = aboutMeInfo[state.slides.currentRecord]['front-image'];
@@ -647,8 +666,9 @@ function displayModal() {
       state.game.onSkillsModal = true;
 
       guideList.innerHTML = `
-        <li>Use left and right arrow keys, or click arrows to explore collection.</li>
-        <li>Use Escape key to get back to home.</li>
+        <li>Explore collection with <span class="neon-yellow">Left</span> and <span class="neon-yellow">right arrows</span> using <span class="neon-yellow">keyboard</span> or <span class="neon-yellow">mouse</span>.</li>
+        <li>Get back to Home with <span class="neon-yellow">Back button</span> above or <span class="neon-yellow">Escape</span>.</li>
+        <li>Zoom in and out with <span class="neon-yellow">Enter</span> or <span class="neon-yellow">click on the record</span>.</li>
       `;
 
       slideImage.src = skillsInfo[state.slides.currentRecord].image;
@@ -668,9 +688,10 @@ function displayModal() {
       state.game.onProjectsModal = true;
 
       guideList.innerHTML = `
-        <li>Use left and right arrow keys, or click arrows to explore collection.</li>
-        <li>Use Escape key to get back to home.</li>
-        <li>Click on the record to zoom in and zoom out.</li>
+        <li>Explore collection with <span class="neon-yellow">Left</span> and <span class="neon-yellow">right arrows</span> using <span class="neon-yellow">keyboard</span> or <span class="neon-yellow">mouse</span>.</li>
+        <li>Get back to Home with <span class="neon-yellow">Back button</span> above or <span class="neon-yellow">Escape</span>.</li>
+        <li>Zoom in and out with <span class="neon-yellow">Enter</span> or <span class="neon-yellow">click on the record</span>.</li>
+        <li>Flip cover with <span class="neon-yellow">space</span> or <span class="neon-yellow">Side button</span> below.</li>
       `;
 
       slideImage.src = projectsInfo[state.slides.currentRecord]['front-image'];
@@ -756,8 +777,8 @@ function displayHome() {
   state.slides.isZoomed = false;
 
   guideList.innerHTML = `
-    <li>Use left and right arrow keys to move.</li>
-    <li>Use space to explore a collection.</li>
+    <li>Move with <span class="neon-yellow">left</span> and <span class="neon-yellow">right arrows</span> or <span class="neon-yellow">click</span> on shleves.</li>
+    <li>Explore a shelf with <span class="neon-yellow">space</span> or <span class="neon-yellow">click</span> on it.</li>
     <li>Shopkeeper explains about each collection.</li>
   `;
 }

@@ -34,6 +34,11 @@ p {
   color: white;
 }
 
+.neon-yellow{
+  color: var(--neon-yellow);
+  text-shadow: 0 0 7px var(--neon-yellow);
+}
+
 .neon-blue-border {
   border: 2px solid var(--neon-blue);
   border-radius: 10px;
