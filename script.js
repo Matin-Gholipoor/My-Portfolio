@@ -18,6 +18,9 @@ const slideImageContent = document.getElementById('slide-image-content');
 const modalSlideContainer = document.getElementById('modal-slide-container');
 const levelContainer = document.getElementById('level-container');
 const levelProgressBar = document.getElementById('level-progress-bar');
+const shelf1 = document.getElementById('shelf-1');
+const shelf2 = document.getElementById('shelf-2');
+const shelf3 = document.getElementById('shelf-3');
 
 const state = {
   mainCharacter: {
@@ -338,6 +341,10 @@ document.body.addEventListener('keyup', (event) => {
       state.game.isStarted = true;
       state.game.onHome = true;
 
+      document.querySelectorAll('.shelf').forEach((shelf) => {
+        shelf.style.pointerEvents = 'auto';
+      });
+
       displayDialogue(0);
       displayHome();
     }
@@ -345,10 +352,10 @@ document.body.addEventListener('keyup', (event) => {
   else if (state.game.onHome) {
     switch (event.key) {
       case 'ArrowRight':
-        moveMainCharacter('right');
+        moveMainCharacter('right', 1);
         break;
       case 'ArrowLeft':
-        moveMainCharacter('left');
+        moveMainCharacter('left', 1);
         break;
       case ' ':
         if (!state.mainCharacter.isMoving) {
@@ -465,6 +472,48 @@ toggleSideButton.addEventListener('click', toggleSide);
 
 slideImage.addEventListener('click', toggleZoom);
 
+shelf1.addEventListener('click', () => {
+  switch (state.mainCharacter.position) {
+    case 0:
+      displayModal();
+      break;
+    case 1:
+      moveMainCharacter('left', 1);
+      break;
+    case 2:
+      moveMainCharacter('left', 2);
+      break;
+  }
+});
+
+shelf2.addEventListener('click', () => {
+  switch (state.mainCharacter.position) {
+    case 0:
+      moveMainCharacter('right', 1);
+      break;
+    case 1:
+      displayModal();
+      break;
+    case 2:
+      moveMainCharacter('left', 1);
+      break;
+  }
+});
+
+shelf3.addEventListener('click', () => {
+  switch (state.mainCharacter.position) {
+    case 0:
+      moveMainCharacter('right', 2);
+      break;
+    case 1:
+      moveMainCharacter('right', 1);
+      break;
+    case 2:
+      displayModal();
+      break;
+  }
+});
+
 init();
 
 function init() {
@@ -477,15 +526,24 @@ function init() {
   mainCharacter.alt = mainCharacterFigures[0].alt;
 }
 
-function moveMainCharacter(direction) {
+function moveMainCharacter(direction, times) {
   if (!state.mainCharacter.isMoving) {
 
     if (direction === "right") {
       switch (state.mainCharacter.position) {
         case 0:
-          mainCharacter.style.transform = 'translate(-40px, 100px)';
-          state.mainCharacter.position = 1;
-          state.mainCharacter.isMoving = true;
+          switch (times) {
+            case 1:
+              mainCharacter.style.transform = 'translate(-40px, 100px)';
+              state.mainCharacter.position = 1;
+              state.mainCharacter.isMoving = true;
+              break;
+            case 2:
+              mainCharacter.style.transform = 'translate(160px, 100px)';
+              state.mainCharacter.position = 2;
+              state.mainCharacter.isMoving = true;
+              break;
+          }
           break;
         case 1:
           mainCharacter.style.transform = 'translate(160px, 100px)';
@@ -497,9 +555,18 @@ function moveMainCharacter(direction) {
     else if (direction === 'left') {
       switch (state.mainCharacter.position) {
         case 2:
-          mainCharacter.style.transform = 'translate(-40px, 100px)';
-          state.mainCharacter.position = 1;
-          state.mainCharacter.isMoving = true;
+          switch (times) {
+            case 1:
+              mainCharacter.style.transform = 'translate(-40px, 100px)';
+              state.mainCharacter.position = 1;
+              state.mainCharacter.isMoving = true;
+              break;
+            case 2:
+              mainCharacter.style.transform = 'translate(-240px, 100px)';
+              state.mainCharacter.position = 0;
+              state.mainCharacter.isMoving = true;
+              break;
+          }
           break;
         case 1:
           mainCharacter.style.transform = 'translate(-240px, 100px)';

@@ -186,6 +186,9 @@ h2 {
 
 .shelf {
   position: absolute;
+
+  cursor: pointer;
+  pointer-events: none;
 }
 
 .shelf img {
