@@ -57,67 +57,67 @@ const shopkeeperDialogues = [
 const skillsInfo = [
   {
     name: 'JavaScript',
-    image: 'assets/images/skills/JavaScript.png',
+    image: 'assets/images/skills/JavaScript.jpg',
     alt: 'JavaScript',
     level: 10
   },
   {
     name: 'HTML-CSS',
-    image: 'assets/images/skills/HTML-CSS.png',
+    image: 'assets/images/skills/HTML-CSS.jpg',
     alt: 'HTML-CSS',
     level: 10
   },
   {
     name: 'React',
-    image: 'assets/images/skills/react.png',
+    image: 'assets/images/skills/react.jpg',
     alt: 'React',
     level: 10
   },
   {
     name: 'C/C++',
-    image: 'assets/images/skills/C-C++.png',
+    image: 'assets/images/skills/C-C++.jpg',
     alt: 'C/C++',
     level: 10
   },
   {
     name: 'Python',
-    image: 'assets/images/skills/python.png',
+    image: 'assets/images/skills/python.jpg',
     alt: 'Python',
     level: 4
   },
   {
     name: 'Git',
-    image: 'assets/images/skills/git.png',
+    image: 'assets/images/skills/git.jpg',
     alt: 'Git',
     level: 8
   },
   {
     name: 'Linux',
-    image: 'assets/images/skills/linux.png',
+    image: 'assets/images/skills/linux.jpg',
     alt: 'Linux',
     level: 7
   },
   {
     name: 'Qt',
-    image: 'assets/images/skills/qt.png',
+    image: 'assets/images/skills/qt.jpg',
     alt: 'Qt',
     level: 4
   },
   {
     name: 'English',
-    image: 'assets/images/skills/english.png',
+    image: 'assets/images/skills/english.jpg',
     alt: 'English',
     level: 10
   },
   {
     name: 'Photoshop',
-    image: 'assets/images/skills/photoshop.png',
+    image: 'assets/images/skills/photoshop.jpg',
     alt: 'Photoshop',
     level: 8
   },
   {
     name: 'Autocad',
-    image: 'assets/images/skills/autocad.png',
+    image: 'assets/images/skills/autocad.jpg',
     alt: 'Autocad',
     level: 5
   }
@@ -149,9 +149,9 @@ const mainCharacterFigures = [
 const aboutMeInfo = [
   {
     name: 'about me',
-    'front-image': 'assets/images/about me/about me - front.png',
+    'front-image': 'assets/images/about me/about me - front.jpg',
     'front-alt': 'about me - front',
-    'back-image': 'assets/images/about me/about me - back.png',
+    'back-image': 'assets/images/about me/about me - back.jpg',
     'back-alt': 'about me - back',
     'back-side-html': `
         <p class="white">
@@ -161,9 +161,9 @@ const aboutMeInfo = [
   },
   {
     name: 'eduction',
-    'front-image': 'assets/images/about me/education - front.png',
+    'front-image': 'assets/images/about me/education - front.jpg',
     'front-alt': 'education - front',
-    'back-image': 'assets/images/about me/education - back.png',
+    'back-image': 'assets/images/about me/education - back.jpg',
     'back-alt': 'education - back',
     'back-side-html': `
         <div>
@@ -199,9 +199,9 @@ const aboutMeInfo = [
   },
   {
     name: 'contact me',
-    'front-image': 'assets/images/about me/contact me - front.png',
+    'front-image': 'assets/images/about me/contact me - front.jpg',
     'front-alt': 'contact me - front',
-    'back-image': 'assets/images/about me/contact me - back.png',
+    'back-image': 'assets/images/about me/contact me - back.jpg',
     'back-alt': 'contact me - back',
     'back-side-html': `
       <div style="height: 100%; display:flex; flex-direction:column; justify-content: center;">
@@ -243,9 +243,9 @@ const aboutMeInfo = [
 const projectsInfo = [
   {
     name: 'youtube clone with html, css',
-    'front-image': 'assets/images/projects/youtube clone with html, css - front.png',
+    'front-image': 'assets/images/projects/youtube clone with html, css - front.jpg',
     'front-alt': 'youtube clone with html, css - front',
-    'back-image': 'assets/images/projects/youtube clone with html, css - back.png',
+    'back-image': 'assets/images/projects/youtube clone with html, css - back.jpg',
     'back-alt': 'youtube clone with html, css - back',
     'back-side-html': `
         <div>
@@ -275,9 +275,9 @@ const projectsInfo = [
   },
   {
     name: 'miniprojects with html, css, js',
-    'front-image': 'assets/images/projects/miniprojects with html, css, js - front.png',
+    'front-image': 'assets/images/projects/miniprojects with html, css, js - front.jpg',
     'front-alt': 'miniprojects with html, css, js - front',
-    'back-image': 'assets/images/projects/miniprojects with html, css, js - back.png',
+    'back-image': 'assets/images/projects/miniprojects with html, css, js - back.jpg',
     'back-alt': 'miniprojects with html, css, js - back',
     'back-side-html': `
         <div>
@@ -310,9 +310,9 @@ const projectsInfo = [
   },
   {
     name: 'React Chatbot',
-    'front-image': 'assets/images/projects/React Chatbot - front.png',
+    'front-image': 'assets/images/projects/React Chatbot - front.jpg',
     'front-alt': 'React Chatbot',
-    'back-image': 'assets/images/projects/React Chatbot - back.png',
+    'back-image': 'assets/images/projects/React Chatbot - back.jpg',
     'back-alt': 'React Chatbot - back',
     'back-side-html': `
         <div>
@@ -342,9 +342,9 @@ const projectsInfo = [
   },
   {
     name: 'Ecommerce Website - React',
-    'front-image': 'assets/images/projects/Ecommerce Website - React - front.png',
+    'front-image': 'assets/images/projects/Ecommerce Website - React - front.jpg',
     'front-alt': 'Ecommerce Website - React - front',
-    'back-image': 'assets/images/projects/Ecommerce Website - React - back.png',
+    'back-image': 'assets/images/projects/Ecommerce Website - React - back.jpg',
     'back-alt': 'Ecommerce Website - React - back',
     'back-side-html': `
         <div>
@@ -362,9 +362,9 @@ const projectsInfo = [
   },
   {
     name: 'my portfolio',
-    'front-image': 'assets/images/projects/my portfolio - front.png',
+    'front-image': 'assets/images/projects/my portfolio - front.jpg',
     'front-alt': 'my portfolio - front',
-    'back-image': 'assets/images/projects/my portfolio - back.png',
+    'back-image': 'assets/images/projects/my portfolio - back.jpg',
     'back-alt': 'my portfolio - back',
     'back-side-html': `
         <p class="white">
