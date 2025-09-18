@@ -54,6 +54,10 @@ p {
   text-shadow: 0 0 7px var(--neon-blue);
 }
 
+.neon-blue-no-shadow {
+  color: var(--neon-blue);
+}
+
 .neon-blue-border {
   border: 2px solid var(--neon-blue);
   border-radius: 10px;

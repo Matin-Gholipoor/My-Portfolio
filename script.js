@@ -373,9 +373,23 @@ const projectsInfo = [
     'back-image': 'assets/images/projects/my portfolio - back.jpg',
     'back-alt': 'my portfolio - back',
     'back-side-html': `
-        <p class="white">
-          some text 5
-        </p>
+        <div>
+          <p class="white">
+            Github repository:
+            <a
+              href="https://github.com/Matin-Gholipoor/My-Portfolio" target="_blank"
+              style="color: lightblue;"
+            >
+              github.com/Matin-Gholipoor/My-Portfolio
+            </a>
+          </p>
+
+          <br>
+
+          <p class="white">
+            See the project: <span class="neon-blue-no-shadow">Current page :))</span>
+          </p>
+        </div>
       `
   }
 ];
