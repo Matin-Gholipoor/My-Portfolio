@@ -686,6 +686,20 @@ observer.observe(shelf1);
 observer.observe(modal);
 observer.observe(loadingScreen);
 
+function preloadImages(imagePaths, callback) {
+  let loadedCount = 0;
+  const total = imagePaths.length;
+
+  imagePaths.forEach(src => {
+    const img = new Image();
+    img.src = src;
+    img.onload = img.onerror = () => {
+      loadedCount++;
+      loadingMessage.textContent = `Loading Images ... ${(loadedCount / total * 100).toFixed(1)}%`;
+      if (loadedCount === total) callback();
+    };
+  });
+}
 
 init();
 
@@ -701,7 +715,21 @@ function init() {
   loadedGameSection.style.display = 'none';
   startMessage.style.display = 'none';
 
-  window.onload = showGame;
+  const allImages = [
+    "assets/images/environment/background.jpg",
+    "assets/images/environment/CRT monitor frame.png",
+    "assets/images/environment/shelves/shelf 1.png",
+    "assets/images/environment/shelves/shelf 2.png",
+    "assets/images/environment/shelves/shelf 3.png",
+    "assets/images/dialogue box.png",
+    "assets/images/characters/shopkeeper.png",
+    ...mainCharacterFigures.map(f => f.src),
+    ...skillsInfo.map(s => s.image),
+    ...aboutMeInfo.flatMap(a => [a["front-image"], a["back-image"]]),
+    ...projectsInfo.flatMap(p => [p["front-image"], p["back-image"]])
+  ];
+
+  preloadImages(allImages, showGame);
 }
 
 function moveMainCharacter(direction, times) {
