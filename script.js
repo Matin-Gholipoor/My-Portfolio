@@ -681,7 +681,7 @@ function init() {
   loadedGameSection.style.display = 'none';
   startMessage.style.display = 'none';
 
-  window.onload = showGame();
+  window.onload = showGame;
 }
 
 function moveMainCharacter(direction, times) {
