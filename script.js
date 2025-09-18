@@ -27,6 +27,7 @@ const backButton = document.getElementById('back-button');
 const crtMonitorEffect = document.getElementById("crt-effect");
 const loadingScreen = document.getElementById('loading-screen');
 const loadingMessage = document.getElementById('loading-message');
+const loadedGameSection = document.getElementById('loaded-game-section');
 
 const state = {
   mainCharacter: {
@@ -36,6 +37,7 @@ const state = {
     isMoving: false
   },
   game: {
+    isLoaded: false,
     isStarted: false,
     onHome: false,
     onSkillsModal: false,
@@ -427,7 +429,7 @@ document.body.addEventListener('keyup', (event) => {
     event.preventDefault();
   }
 
-  if (!state.game.isStarted) {
+  if (!state.game.isStarted && state.game.isLoaded) {
     if (event.key === ' ') {
       startGame();
     }
@@ -618,7 +620,7 @@ shelf3.addEventListener('click', () => {
 backButton.addEventListener('click', displayHome);
 
 crtMonitorEffect.addEventListener('click', () => {
-  if (!state.game.isStarted) {
+  if (!state.game.isStarted && state.game.isLoaded) {
     startGame();
   }
 });
@@ -675,6 +677,11 @@ function init() {
 
   mainCharacterImage.src = mainCharacterFigures[0].src;
   mainCharacterImage.alt = mainCharacterFigures[0].alt;
+
+  loadedGameSection.style.display = 'none';
+  startMessage.style.display = 'none';
+
+  window.onload = showGame();
 }
 
 function moveMainCharacter(direction, times) {
@@ -1009,4 +1016,13 @@ function startGame() {
 
   displayDialogue(0);
   displayHome();
+}
+
+function showGame() {
+  loadedGameSection.style.display = 'block';
+  startMessage.style.display = 'block';
+
+  loadingScreen.style.display = 'none';
+
+  state.game.isLoaded = true;
 }

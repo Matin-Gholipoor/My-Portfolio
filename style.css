@@ -111,7 +111,7 @@ main {
   position: relative;
 }
 
-#started-game-section {
+#loaded-game-section {
   width: 100%;
   aspect-ratio: 1.2648604933279417711281843914274;
   
@@ -119,7 +119,6 @@ main {
 }
 
 #loading-screen {
-  display: none;
   width: 100%;
   aspect-ratio: 1.2648604933279417711281843914274;
 
