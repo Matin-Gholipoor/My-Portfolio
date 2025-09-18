@@ -105,7 +105,7 @@ const skillsInfo = [
   },
   {
     name: 'Qt',
-    image: 'assets/images/skills/qt.jpg',
+    image: 'assets/images/skills/Qt.jpg',
     alt: 'Qt',
     level: 4
   },
