@@ -632,28 +632,34 @@ const resizeHandler = (entries) => {
 
     if (target === dialogueParagraph) {
       dialogueParagraph.style.fontSize = (width / 195) + "rem";
+      dialogueParagraph.style.lineHeight = (width / 195) + "rem";
     }
 
     else if (target === slideBackContent) {
       slideBackContent.style.fontSize = (width / 195) + "rem";
+      slideBackContent.style.lineHeight = (width / 195) + "rem";
     }
 
     else if (target === shelf1) {
       console.log(shelfTitles)
       shelfTitles.forEach((shelfTitle) => {
         shelfTitle.style.fontSize = (width / 90) + "rem";
+        shelfTitle.style.lineHeight = (width / 90) + "rem";
       });
     }
 
     else if (target === modal) {
       backButton.style.fontSize = (width / 250) + "rem";
+      backButton.style.lineHeight = (width / 250) + "rem";
       toggleSideButton.style.fontSize = (width / 250) + "rem";
+      toggleSideButton.style.lineHeight = (width / 250) + "rem";
       SlideNextButton.style.width = (width / 140) + "rem";
       SlidePreviousButton.style.width = (width / 140) + "rem";
     }
 
     else if (target === loadingScreen) {
       loadingMessage.style.fontSize = (width / 250) + "rem";
+      loadingMessage.style.lineHeight = (width / 250) + "rem";
     }
   }
 };
