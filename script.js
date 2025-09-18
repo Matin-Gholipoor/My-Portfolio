@@ -3,7 +3,8 @@ const volumeOffIcon = document.getElementById('volume-off-icon');
 const music = document.getElementById('music');
 const volumeSlider = document.getElementById('volume-slider');
 const volumeDispalay = document.getElementById('volume-display');
-const mainCharacter = document.getElementById('main-character');
+const mainCharacterImage = document.getElementById('main-character-image');
+const mainCharacterContainer = document.getElementById('main-character-container');
 const dialogueParagraph = document.getElementById('dialogue');
 const startMessage = document.getElementById('start-message');
 const guideList = document.getElementById('guide-list');
@@ -14,15 +15,18 @@ const SlideNextButton = document.getElementById('next-button');
 const modalBottomRow = document.getElementById('modal-bottom-row');
 const toggleSideButton = document.getElementById('toggle-side-button');
 const slideImageContainer = document.getElementById('slide-image-container');
-const slideImageContent = document.getElementById('slide-image-content');
+const slideBackContent = document.getElementById('slide-back-content');
 const modalSlideContainer = document.getElementById('modal-slide-container');
 const levelContainer = document.getElementById('level-container');
 const levelProgressBar = document.getElementById('level-progress-bar');
 const shelf1 = document.getElementById('shelf-1');
 const shelf2 = document.getElementById('shelf-2');
 const shelf3 = document.getElementById('shelf-3');
+const shelfTitles = document.querySelectorAll('.js-shelf-title');
 const backButton = document.getElementById('back-button');
 const crtMonitorEffect = document.getElementById("crt-effect");
+const loadingScreen = document.getElementById('loading-screen');
+const loadingMessage = document.getElementById('loading-message');
 
 const state = {
   mainCharacter: {
@@ -411,7 +415,18 @@ volumeSlider.addEventListener('keydown', (event) => {
   event.preventDefault();
 });
 
+// disable scrolling with space
+window.addEventListener("keydown", (event) => {
+  if (event.key === " ") {
+    event.preventDefault();
+  }
+});
+
 document.body.addEventListener('keyup', (event) => {
+  if (event.key === ' ' && event.target === document.body) {
+    event.preventDefault();
+  }
+
   if (!state.game.isStarted) {
     if (event.key === ' ') {
       startGame();
@@ -518,7 +533,7 @@ document.body.addEventListener('keyup', (event) => {
   }
 });
 
-mainCharacter.addEventListener('transitionend', (event) => {
+mainCharacterContainer.addEventListener('transitionend', (event) => {
   if (event.propertyName === 'transform') {
     endMainCharacterMovement().then(() => {
       displayDialogue(state.mainCharacter.position);
@@ -608,6 +623,48 @@ crtMonitorEffect.addEventListener('click', () => {
   }
 });
 
+const resizeHandler = (entries) => {
+  for (let entry of entries) {
+    const width = entry.contentRect.width;
+    const target = entry.target;
+
+    if (target === dialogueParagraph) {
+      dialogueParagraph.style.fontSize = (width / 195) + "rem";
+    }
+
+    else if (target === slideBackContent) {
+      slideBackContent.style.fontSize = (width / 195) + "rem";
+    }
+
+    else if (target === shelf1) {
+      console.log(shelfTitles)
+      shelfTitles.forEach((shelfTitle) => {
+        shelfTitle.style.fontSize = (width / 90) + "rem";
+      });
+    }
+
+    else if (target === modal) {
+      backButton.style.fontSize = (width / 250) + "rem";
+      toggleSideButton.style.fontSize = (width / 250) + "rem";
+      SlideNextButton.style.width = (width / 140) + "rem";
+      SlidePreviousButton.style.width = (width / 140) + "rem";
+    }
+
+    else if (target === loadingScreen) {
+      loadingMessage.style.fontSize = (width / 250) + "rem";
+    }
+  }
+};
+
+const observer = new ResizeObserver(resizeHandler);
+
+observer.observe(dialogueParagraph);
+observer.observe(slideBackContent);
+observer.observe(shelf1);
+observer.observe(modal);
+observer.observe(loadingScreen);
+
+
 init();
 
 function init() {
@@ -616,8 +673,8 @@ function init() {
 
   displayDialogue(3);
 
-  mainCharacter.src = mainCharacterFigures[0].src;
-  mainCharacter.alt = mainCharacterFigures[0].alt;
+  mainCharacterImage.src = mainCharacterFigures[0].src;
+  mainCharacterImage.alt = mainCharacterFigures[0].alt;
 }
 
 function moveMainCharacter(direction, times) {
@@ -628,19 +685,19 @@ function moveMainCharacter(direction, times) {
         case 0:
           switch (times) {
             case 1:
-              mainCharacter.style.transform = 'translate(-40px, 100px)';
+              mainCharacterContainer.style.transform = 'translate(-130%, 0)';
               state.mainCharacter.position = 1;
               state.mainCharacter.isMoving = true;
               break;
             case 2:
-              mainCharacter.style.transform = 'translate(160px, 100px)';
+              mainCharacterContainer.style.transform = 'translate(180%, 0)';
               state.mainCharacter.position = 2;
               state.mainCharacter.isMoving = true;
               break;
           }
           break;
         case 1:
-          mainCharacter.style.transform = 'translate(160px, 100px)';
+          mainCharacterContainer.style.transform = 'translate(180%, 0)';
           state.mainCharacter.position = 2;
           state.mainCharacter.isMoving = true;
           break;
@@ -651,19 +708,19 @@ function moveMainCharacter(direction, times) {
         case 2:
           switch (times) {
             case 1:
-              mainCharacter.style.transform = 'translate(-40px, 100px)';
+              mainCharacterContainer.style.transform = 'translate(-130%, 0)';
               state.mainCharacter.position = 1;
               state.mainCharacter.isMoving = true;
               break;
             case 2:
-              mainCharacter.style.transform = 'translate(-240px, 100px)';
+              mainCharacterContainer.style.transform = 'translate(-430%, 0)';
               state.mainCharacter.position = 0;
               state.mainCharacter.isMoving = true;
               break;
           }
           break;
         case 1:
-          mainCharacter.style.transform = 'translate(-240px, 100px)';
+          mainCharacterContainer.style.transform = 'translate(-430%, 0)';
           state.mainCharacter.position = 0;
           state.mainCharacter.isMoving = true;
           break;
@@ -672,26 +729,26 @@ function moveMainCharacter(direction, times) {
 
     if (state.mainCharacter.isMoving) {
       if (direction === "right") {
-        mainCharacter.src = mainCharacterFigures[2].src;
-        mainCharacter.alt = mainCharacterFigures[2].alt;
-        mainCharacter.loop = true;
-        mainCharacter.autoplay = true;
+        mainCharacterImage.src = mainCharacterFigures[2].src;
+        mainCharacterImage.alt = mainCharacterFigures[2].alt;
+        mainCharacterImage.loop = true;
+        mainCharacterImage.autoplay = true;
       }
       else {
-        mainCharacter.src = mainCharacterFigures[3].src;
-        mainCharacter.alt = mainCharacterFigures[3].alt;
-        mainCharacter.loop = true;
-        mainCharacter.autoplay = true;
+        mainCharacterImage.src = mainCharacterFigures[3].src;
+        mainCharacterImage.alt = mainCharacterFigures[3].alt;
+        mainCharacterImage.loop = true;
+        mainCharacterImage.autoplay = true;
       }
     }
   }
 }
 
 async function endMainCharacterMovement() {
-  mainCharacter.src = mainCharacterFigures[0].src;
-  mainCharacter.alt = mainCharacterFigures[0].alt;
-  mainCharacter.loop = false;
-  mainCharacter.autoplay = false;
+  mainCharacterImage.src = mainCharacterFigures[0].src;
+  mainCharacterImage.alt = mainCharacterFigures[0].alt;
+  mainCharacterImage.loop = false;
+  mainCharacterImage.autoplay = false;
 
   state.mainCharacter.isMoving = false;
 }
@@ -784,8 +841,8 @@ function displayModal() {
   state.game.onHome = false;
   modal.style.display = 'flex';
 
-  mainCharacter.src = mainCharacterFigures[1].src;
-  mainCharacter.alt = mainCharacterFigures[1].alt;
+  mainCharacterImage.src = mainCharacterFigures[1].src;
+  mainCharacterImage.alt = mainCharacterFigures[1].alt;
 
   modalBottomRow.style.display = 'flex';
 
@@ -798,7 +855,7 @@ function displayModal() {
 
   backButton.style.visibility = 'visible';
 
-  slideImageContent.innerHTML = '';
+  slideBackContent.innerHTML = '';
 
   // checking wether to display next button
   switch (state.mainCharacter.position) {
@@ -836,8 +893,8 @@ function displayHome() {
 
   modal.style.display = 'none';
 
-  mainCharacter.src = mainCharacterFigures[0].src;
-  mainCharacter.alt = mainCharacterFigures[0].alt;
+  mainCharacterImage.src = mainCharacterFigures[0].src;
+  mainCharacterImage.alt = mainCharacterFigures[0].alt;
 
   modalBottomRow.style.display = 'none';
 
@@ -847,7 +904,6 @@ function displayHome() {
   backButton.style.visibility = 'hidden';
 
   modalSlideContainer.style.width = '50%';
-  slideImageContent.style.fontSize = '14px';
 
   state.slides.side = 'front';
   state.slides.currentRecord = 0;
@@ -870,7 +926,7 @@ function toggleSide() {
 
       state.slides.side = 'back';
 
-      slideImageContent.innerHTML = aboutMeInfo[state.slides.currentRecord]['back-side-html'];
+      slideBackContent.innerHTML = aboutMeInfo[state.slides.currentRecord]['back-side-html'];
     }
     else {
       slideImage.src = aboutMeInfo[state.slides.currentRecord]['front-image'];
@@ -880,7 +936,7 @@ function toggleSide() {
 
       state.slides.side = 'front';
 
-      slideImageContent.textContent = '';
+      slideBackContent.textContent = '';
     }
   }
   else if (state.game.onProjectsModal) {
@@ -892,7 +948,7 @@ function toggleSide() {
 
       state.slides.side = 'back';
 
-      slideImageContent.innerHTML = projectsInfo[state.slides.currentRecord]['back-side-html'];
+      slideBackContent.innerHTML = projectsInfo[state.slides.currentRecord]['back-side-html'];
     }
     else {
       slideImage.src = projectsInfo[state.slides.currentRecord]['front-image'];
@@ -902,7 +958,7 @@ function toggleSide() {
 
       state.slides.side = 'front';
 
-      slideImageContent.textContent = '';
+      slideBackContent.textContent = '';
     }
   }
 }
@@ -922,8 +978,6 @@ function toggleZoom() {
 
     backButton.style.visibility = 'visible';
 
-    slideImageContent.style.fontSize = '14px';
-
     state.slides.isZoomed = false;
   }
   else {
@@ -935,8 +989,6 @@ function toggleZoom() {
     SlidePreviousButton.style.visibility = 'hidden';
 
     backButton.style.visibility = 'hidden';
-
-    slideImageContent.style.fontSize = '21.5px';
 
     state.slides.isZoomed = true;
   }

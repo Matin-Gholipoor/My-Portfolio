@@ -7,6 +7,8 @@
   --neon-green: rgb(90, 176, 0);
   --neon-saturated-pink: rgb(231, 19, 248);
   --neon-orange: rgb(255, 128, 0);
+
+  font-size: 62.5%;
 }
 
 * {
@@ -34,11 +36,11 @@ p {
   color: white;
 }
 
-.darkgray{
+.darkgray {
   color: black;
 }
 
-.neon-orange{
+.neon-orange {
   color: var(--neon-orange);
 }
 
@@ -88,20 +90,51 @@ h1 {
 }
 
 main {
-  flex: 1;
   display: flex;
   column-gap: 20px;
+  row-gap: 20px;
   min-height: 0;
   max-height: 100%;
 }
 
-main>section {
+@media (max-width: 1024px) {
+  main{
+    flex-direction: column;
+  }
+}
+
+#game-section {
   display: flex;
   align-items: center;
   justify-content: center;
 
-
   position: relative;
+}
+
+#started-game-section {
+  width: 100%;
+  aspect-ratio: 1.2648604933279417711281843914274;
+  
+  position: absolute;
+}
+
+#loading-screen {
+  display: none;
+  width: 100%;
+  aspect-ratio: 1.2648604933279417711281843914274;
+
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#loading-message {
+  color: white;
+  text-shadow: 0 0 7px white;
+
+  animation: blink 2s infinite;
 }
 
 aside {
@@ -125,6 +158,8 @@ aside {
   column-gap: 10px;
 
   margin-bottom: 10px;
+
+  font-size: 1.8rem;
 }
 
 .volume-row input {
@@ -167,6 +202,7 @@ aside {
 }
 
 h2 {
+  font-size: 2rem;
   padding: 5px;
   margin: 0 0 20px 0;
 }
@@ -175,7 +211,6 @@ h2 {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  position: relative;
 
   z-index: 100;
 
@@ -186,14 +221,20 @@ h2 {
   width: 94%;
   height: 94%;
   object-fit: contain;
+
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #shopkeeper {
-  height: 180px;
+  width: 19%;
 
   position: absolute;
-  transform: translate(-100px, -60px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-130%, -80%);
 }
 
 .shelf {
@@ -201,71 +242,75 @@ h2 {
 
   cursor: pointer;
   pointer-events: none;
+
+  width: 23%;
 }
 
 .shelf img {
-  width: 170px;
+  width: 100%;
 }
 
 #shelf-1 {
-  transform: translate(-180px, 100px);
-}
-
-#shelf-1::after {
-  content: 'About';
-
-  position: absolute;
-  transform: translate(-102px, 4px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-150%, 40%);
 }
 
 #shelf-2 {
-  transform: translate(20px, 100px);
-}
-
-#shelf-2::after {
-  content: 'Skills';
-
-  position: absolute;
-  transform: translate(-105px, 4px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%, 40%);
 }
 
 #shelf-3 {
-  transform: translate(220px, 100px);
+  top: 50%;
+  left: 50%;
+  transform: translate(70%, 40%);
 }
 
-#shelf-3::after {
-  content: 'Projects';
-
+.shelf-title {
   position: absolute;
-  transform: translate(-110px, 4px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -260%);
+
+  font-size: 2rem;
 }
 
-#main-character {
+#main-character-container {
+  width: 8.4%;
+  aspect-ratio: 0.35602094240837696335078534031414;
   position: absolute;
   z-index: 50;
-  height: 180px;
-  transform: translate(-240px, 100px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-430%, 0);
   transition: transform 500ms linear;
 }
 
-#dialogue-box {
-  position: absolute;
-  transform: translate(120px, -30px);
-  height: 100px;
-}
-
-#dialogue-box img {
-  width: 350px;
+#main-character-image {
   height: 100%;
 }
 
+#dialogue-box {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-15%, -75%);
+  width: 45.4%;
+}
+
+#dialogue-box img {
+  width: 100%;
+}
+
 #dialogue {
-  width: 315px;
+  position: absolute;
+  top: 12%;
+  left: 7%;
+  width: 87%;
   color: white;
   text-shadow: 0 0 7px white;
-  font-size: 16px;
-
-  transform: translate(23px, -90px);
 }
 
 .shopkeeper-speaker-text {
@@ -277,17 +322,17 @@ h2 {
   background-image:
     repeating-linear-gradient(lightgray 0px, lightgray 1px, gray 3px, gray 4px, lightgray 6px, lightgray 7px);
 
-  width: 100%;
-  height: 100%;
-
-  position: absolute;
-  z-index: 99;
-
   opacity: 10%;
 
   animation: crt-monitor-effect-animation 500ms linear infinite;
 
   border-radius: 30px;
+
+  width: 100%;
+  aspect-ratio: 1.33;
+
+  position: absolute;
+  z-index: 99;
 }
 
 @keyframes crt-monitor-effect-animation {
@@ -326,6 +371,8 @@ h2 {
   font-size: 28px;
 
   animation: blink 2s infinite;
+
+  margin-bottom: 24px;
 }
 
 @keyframes blink {
@@ -346,6 +393,8 @@ h2 {
   background-color: rgba(0, 0, 0, 60%);
 
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   border-radius: 30px;
@@ -373,8 +422,6 @@ h2 {
 .slide-button {
   background: none;
   border: none;
-
-  width: 40px;
 
   cursor: pointer;
 }
@@ -418,9 +465,7 @@ h2 {
   cursor: pointer;
 }
 
-#slide-image-content {
-  font-size: 14px;
-
+#slide-back-content {
   position: absolute;
   top: 0;
 
@@ -435,7 +480,7 @@ h2 {
   height: 100%;
 }
 
-#slide-image-content a {
+#slide-back-content a {
   pointer-events: auto;
 }
 

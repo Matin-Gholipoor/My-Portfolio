@@ -57,65 +57,77 @@
       <p id="start-message">"Hit space" or "click on monitor" to start</p>
     </aside>
 
-    <section>
+    <section id="game-section">
       <div id="crt-effect"></div>
-
-      <img src="assets/images/environment/background.jpg" alt="background" id="background">
       <img src="assets/images/environment/CRT monitor frame.png" alt="CRT monitor frame" id="crt-monitor">
 
-      <img src="assets/images/characters/shopkeeper.png" alt="shopkeeper" id="shopkeeper">
-      <img src="" alt="" id="main-character">
-
-      <div id="shelf-1" class="shelf">
-        <img src="assets/images/environment/shelves/shelf 1.png" alt="shelf 1">
-      </div>
-      <div id="shelf-2" class="shelf">
-        <img src="assets/images/environment/shelves/shelf 2.png" alt="shelf 2">
-      </div>
-      <div id="shelf-3" class="shelf">
-        <img src="assets/images/environment/shelves/shelf 3.png" alt="shelf 3">
+      <div id="loading-screen">
+        <p id="loading-message">Loading ...</p>
       </div>
 
-      <div id="dialogue-box">
-        <img src="assets/images/dialogue box.png" alt="dialogue box">
+      <div id="started-game-section">
+        <img src="assets/images/environment/background.jpg" alt="background" id="background">
 
-        <p id="dialogue">
-          <span class="shopkeeper-speaker-text">Shopkeeper: </span>
-        </p>
-      </div>
-
-      <div id="modal">
-        <button id="back-button">
-          Back to Home
-        </button>
-
-        <div id="modal-slide-container">
-          <button id="previous-button" class="slide-button">
-            <img src="assets/images/arrow.png" alt="right arrow">
-          </button>
-
-          <div id="slide-image-container">
-            <img src="" alt="" id="slide-image">
-
-            <div id="slide-image-content"></div>
-          </div>
-
-          <button id="next-button" class="slide-button">
-            <img src="assets/images/arrow.png" alt="left arrow">
-          </button>
+        <img src="assets/images/characters/shopkeeper.png" alt="shopkeeper" id="shopkeeper">
+        <div id="main-character-container">
+          <img src="" alt="" id="main-character-image">
         </div>
 
-        <div id="modal-bottom-row">
-          <button id="toggle-side-button"></button>
-          
-          <div id="level-container">
-            <p class="white">level: </p>
-            <div id="level-progress-bar">
-            
+        <div id="shelf-1" class="shelf">
+          <p class="shelf-title js-shelf-title">About me</p>
+          <img src="assets/images/environment/shelves/shelf 1.png" alt="shelf 1">
+        </div>
+        <div id="shelf-2" class="shelf">
+          <p class="shelf-title js-shelf-title">Skills</p>
+          <img src="assets/images/environment/shelves/shelf 2.png" alt="shelf 2">
+        </div>
+        <div id="shelf-3" class="shelf">
+          <p class="shelf-title js-shelf-title">Projects</p>
+          <img src="assets/images/environment/shelves/shelf 3.png" alt="shelf 3">
+        </div>
+
+        <div id="dialogue-box">
+          <img src="assets/images/dialogue box.png" alt="dialogue box">
+
+          <p id="dialogue">
+            <span class="shopkeeper-speaker-text">Shopkeeper: </span>
+          </p>
+        </div>
+
+        <div id="modal">
+          <button id="back-button">
+            Back to Home
+          </button>
+
+          <div id="modal-slide-container">
+            <button id="previous-button" class="slide-button">
+              <img src="assets/images/arrow.png" alt="right arrow">
+            </button>
+
+            <div id="slide-image-container">
+              <img src="" alt="" id="slide-image">
+
+              <div id="slide-back-content"></div>
+            </div>
+
+            <button id="next-button" class="slide-button">
+              <img src="assets/images/arrow.png" alt="left arrow">
+            </button>
+          </div>
+
+          <div id="modal-bottom-row">
+            <button id="toggle-side-button"></button>
+
+            <div id="level-container">
+              <p class="white">level: </p>
+              <div id="level-progress-bar">
+
+              </div>
             </div>
           </div>
         </div>
       </div>
+
     </section>
   </main>
 
@@ -123,4 +135,3 @@
 </body>
 
 </html>
-
